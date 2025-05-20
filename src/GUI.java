@@ -360,6 +360,7 @@ public class GUI extends JFrame {
                 } catch (AbnormalPieceException e) {
                     JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + file.getName(), "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
                     resetPuzzleStateAndButtons();
+                    return;
                 }
                 System.out.println("piece '"+b.id+"' is "+orientation+" at "+b.cells);
             }
