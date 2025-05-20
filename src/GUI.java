@@ -31,6 +31,8 @@ public class GUI extends JFrame {
     private Timer animationTimer;
     private List<String> currentSolutionPathForAnimation;
     private int animationMoveIndex;
+    private long searchExecutionTime;
+    private long animationStartTime;
 
     public GUI() {
         setTitle("Block Grid Renderer");
@@ -49,20 +51,99 @@ public class GUI extends JFrame {
 
         loadButton.addActionListener(e -> {
             if (animationTimer != null && animationTimer.isRunning()) {
-                animationTimer.stop(); // Stop animasi jika file baru di-load
+                animationTimer.stop(); // Stop animasi kalau file baru di-load
             }
             loadFile();
         });
-        aStarButton.addActionListener(e -> {
+        greedyBestButton.addActionListener(e -> {
             if (gridState == null || kLocation == null) {
-                JOptionPane.showMessageDialog(this, "Please load a valid puzzle file with a 'K' goal first.", "A* Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Tolong load file puzzle valid dengan 'K'", "Error (Greedy Best First Search)", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (animationTimer != null && animationTimer.isRunning()) {
                 animationTimer.stop(); // Stop animasi sebelumnya kalau A* dijalankan lagi
             }
 
-            System.out.println("A* Solver Started...");
+            System.out.println("\nGreedy Best First Search Solver Dimulai");
+            greedyBestButton.setEnabled(false);
+            loadButton.setEnabled(false);
+            aStarButton.setEnabled(false);
+            ucsButton.setEnabled(false);
+
+            new Thread(() -> {
+                long startTime = System.currentTimeMillis();
+                List<String> solutionPath = solveGreedyBestFirstSearch(startTime);
+                long endTime = System.currentTimeMillis();
+                this.searchExecutionTime = endTime - startTime;
+                System.out.println("Greedy Best First Search Solver berakhir dalam " + this.searchExecutionTime + " ms.");
+
+                SwingUtilities.invokeLater(() -> {
+                    if (solutionPath != null && !solutionPath.isEmpty()) {
+                        System.out.println("\nPencarian dengan Greedy Best First Search (" + solutionPath.size() + " pergerakan):");
+                        for (String move : solutionPath) {
+                            System.out.println(move);
+                        }
+                        animateSolution(solutionPath);
+                    } else {
+                        // Kalau tidak ada solusi atau error saat solveGreedyBestFirstSearch
+                        greedyBestButton.setEnabled(true);
+                        loadButton.setEnabled(true);
+                        aStarButton.setEnabled(gridState != null);
+                        ucsButton.setEnabled(gridState != null);
+                    }
+                });
+            }).start();
+        });
+        ucsButton.addActionListener(e -> {
+            if (gridState == null || kLocation == null) {
+                JOptionPane.showMessageDialog(this, "Tolong load file puzzle valid dengan 'K'", "Error (Uniform Cost Search)", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (animationTimer != null && animationTimer.isRunning()) {
+                animationTimer.stop(); // Stop previous animation if UCS is run again
+            }
+
+            System.out.println();
+            System.out.println("\nUniform Cost Search Solver Dimulai");
+            ucsButton.setEnabled(false);
+            loadButton.setEnabled(false);
+            greedyBestButton.setEnabled(false);
+            aStarButton.setEnabled(false);
+
+            new Thread(() -> {
+                long startTime = System.currentTimeMillis();
+                List<String> solutionPath = solveUniformCostSearch(startTime);
+                long endTime = System.currentTimeMillis();
+                this.searchExecutionTime = endTime - startTime;
+                System.out.println("Uniform Cost Search Solver berakhir dalam " + this.searchExecutionTime + " ms.");
+
+                SwingUtilities.invokeLater(() -> {
+                    if (solutionPath != null && !solutionPath.isEmpty()) {
+                        System.out.println("\nPencarian dengan Uniform Cost Search (" + solutionPath.size() + " pergerakan):");
+                        for (String move : solutionPath) {
+                            System.out.println(move);
+                        }
+                        animateSolution(solutionPath); // Call animation method
+                    } else {
+                        ucsButton.setEnabled(true);
+                        loadButton.setEnabled(true);
+                        greedyBestButton.setEnabled(gridState != null);
+                        aStarButton.setEnabled(gridState != null);
+                    }
+                    // Buttons re-enabled by animateSolution or if no solution
+                });
+            }).start();
+        });
+        aStarButton.addActionListener(e -> {
+            if (gridState == null || kLocation == null) {
+                JOptionPane.showMessageDialog(this, "Tolong load file puzzle valid dengan 'K'", "Error (A*)", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (animationTimer != null && animationTimer.isRunning()) {
+                animationTimer.stop();
+            }
+
+            System.out.println("\nA* Solver Dimulai");
             aStarButton.setEnabled(false);
             loadButton.setEnabled(false);
             greedyBestButton.setEnabled(false);
@@ -70,13 +151,14 @@ public class GUI extends JFrame {
 
             new Thread(() -> {
                 long startTime = System.currentTimeMillis();
-                List<String> solutionPath = solveAStar();
+                List<String> solutionPath = solveAStar(startTime);
                 long endTime = System.currentTimeMillis();
-
+                this.searchExecutionTime = endTime - startTime;
+                System.out.println("A* Solver berakhir dalam " + this.searchExecutionTime + " ms.");
+                
                 SwingUtilities.invokeLater(() -> {
-                    System.out.println("A* Solver finished in " + (endTime - startTime) + " ms.");
                     if (solutionPath != null && !solutionPath.isEmpty()) {
-                        System.out.println("Solution Path (" + solutionPath.size() + " moves):");
+                        System.out.println("\nPencarian dengan A* (" + solutionPath.size() + " pergerakan):");
                         for (String move : solutionPath) {
                             System.out.println(move);
                         }
@@ -112,7 +194,7 @@ public class GUI extends JFrame {
 
     private void loadFile() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("d:\\Programs\\tucil3\\test"));
+        fileChooser.setCurrentDirectory(new File("..\\test"));
         fileChooser.setFileFilter(new FileNameExtensionFilter("Text files", "txt"));
 
         int result = fileChooser.showOpenDialog(this);
@@ -125,6 +207,10 @@ public class GUI extends JFrame {
     public static int getMaxLength(String filePath) {
         int maxLength = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            // Skip dua baris pertama
+            reader.readLine();
+            reader.readLine();
+            
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.length() > maxLength) {
@@ -132,7 +218,7 @@ public class GUI extends JFrame {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading file for max line length: " + e.getMessage());
+            System.err.println("Error membaca file teks untuk mencari panjang baris maksimal: " + e.getMessage());
             return 0;
         }
         return maxLength;
@@ -145,92 +231,160 @@ public class GUI extends JFrame {
                 lineCount++;
             }
         } catch (IOException e) {
-            System.err.println("Error reading file for line count: " + e.getMessage());
+            System.err.println("Error membaca file teks: " + e.getMessage());
             return 0;
         }
-        lineCount -= 2;
+        lineCount -= 2; // dua baris pertama
         return lineCount;
     }
 
     private void parseAndRenderFile(File file) {
+        char[][] newGridData = null;
+        Point newKLocationFromFile = null;
+        int gridRow = 0;
+        int gridCol = 0;
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // hitung ukuran grid dari file
-            int gridRows = getLineCount(file.getPath());
-            int gridColumns = getMaxLength(file.getPath());
+            // Baris pertama
+            String firstLine = reader.readLine();
+            if (firstLine == null) {
+                JOptionPane.showMessageDialog(this, "File kosong atau format header salah.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                resetPuzzleStateAndButtons();
+                return;
+            }
+            String[] dimensionsStr = firstLine.trim().split("\\s+");
+            if (dimensionsStr.length < 2) {
+                JOptionPane.showMessageDialog(this, "Format baris pertama salah (dimensi). Harus ada dua angka.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                resetPuzzleStateAndButtons();
+                return;
+            }
+            int row = Integer.parseInt(dimensionsStr[0]);
+            int col = Integer.parseInt(dimensionsStr[1]);
 
-            // Baca baris pertama
-            String[] dimensions = reader.readLine().trim().split("\\s+");
-            int rows = Integer.parseInt(dimensions[0]);
-            int columns = Integer.parseInt(dimensions[1]);
-            
-            // Baca baris kedua untuk jumlah piece selain P
-            String piecesLine = reader.readLine().trim();
-            int numPieces = Integer.parseInt(piecesLine);
+            // Baris kedua
+            if (reader.readLine() == null) { // piecesLine
+                JOptionPane.showMessageDialog(this, "File tidak lengkap, baris kedua (jumlah piece) hilang.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                resetPuzzleStateAndButtons();
+                return;
+            }
 
-            char[][] grid = new char[gridRows][gridColumns];
-            this.kLocation = null;
-            this.gridState = grid;
-            this.gridRows = gridRows;
-            this.gridColumns = gridColumns;
+            // Ukuran grid sebenarnya
+            gridRow = getLineCount(file.getPath());
+            gridCol = getMaxLength(file.getPath());
 
-            for (int i = 0; i < gridRows; i++) {
+            if (gridRow <= 0) {
+                 JOptionPane.showMessageDialog(this, "Tidak ada data.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                resetPuzzleStateAndButtons();
+                return;
+            }
+
+            newGridData = new char[gridRow][gridCol];
+
+            // 3. Read grid data and Validate 'K' Position
+            for (int i = 0; i < gridRow; i++) {
                 String line = reader.readLine();
-                if (line == null) break;
-                for (int j = 0; j < gridColumns; j++) {
-                    // fill from file or use '.' if beyond line-length
+                if (line == null) {
+                    JOptionPane.showMessageDialog(this, "Struktur file tidak konsisten: jumlah baris data aktual lebih sedikit dari yang dihitung.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                    resetPuzzleStateAndButtons();
+                    return;
+                }
+                for (int j = 0; j < gridCol; j++) {
                     if (j < line.length()) {
                         char c = line.charAt(j);
                         if (c == 'K') {
-                            // Cari nilai K
-                            if (this.kLocation == null) {
-                                this.kLocation = new Point(i, j);
-                                grid[i][j] = '.';
-                            } else {
-                                System.out.println("Ada lebih dari satu 'K'. Pastikan hanya ada satu.");
-                                System.exit(0);
+                            // Kalau ada lebih dari satu 'K'
+                            if (newKLocationFromFile != null) {
+                                JOptionPane.showMessageDialog(this, "Error: Ada lebih dari satu 'K' dalam file.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                                resetPuzzleStateAndButtons();
+                                return;
                             }
+                            newKLocationFromFile = new Point(i, j);
+                            newGridData[i][j] = '.'; // Replace 'K' with '.' for solver logic
                         } else {
-                            grid[i][j] = c;
+                            newGridData[i][j] = c;
                         }
                     } else {
-                        grid[i][j] = ' ';
+                        newGridData[i][j] = ' '; // Fill short lines with spaces (or '.')
                     }
                 }
             }
-            this.gridState = grid;
 
-            List<BlockGroup> pieces = findBlockGroups(grid,gridRows,gridColumns);
-            for(BlockGroup b:pieces){
-                String orientation;
-                if (b.isHorizontal()) orientation = "horizontal";
-                else orientation = "vertical";
-                System.out.println(
-                    "piece '"+b.id+"' is "+orientation+
-                    " at "+b.cells);
+            // Kalau tidak ada 'K'
+            if (newKLocationFromFile == null) {
+                JOptionPane.showMessageDialog(this, "Error: Tidak ada 'K' (tujuan) yang ditemukan dalam file.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                resetPuzzleStateAndButtons();
+                return;
+            }
+
+            // If all validations pass, update the GUI state
+            this.gridState = newGridData;
+            this.kLocation = newKLocationFromFile;
+            this.gridRows = gridRow;
+            this.gridColumns = gridCol;
+
+            // For debugging piece identification:
+            List<Piece> pieces = findPieces(this.gridState, this.gridRows, this.gridColumns);
+            System.out.println("\nPiece ditemukan di " + file.getName() + ":");
+            for (Piece b : pieces) {
+                String orientation = "single";
+                try {
+                    if (b.cells.size() >= 2) {
+                        if (b.isHorizontal()) { orientation = "horizontal"; }
+                        else { orientation = "vertical"; }
+                    }
+                    else {
+                        throw new AbnormalPieceException("Piece " + b.id + " abnormal");
+                    }
+                    // else orientation = "abnormal";
+                } catch (AbnormalPieceException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + file.getName(), "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+                    resetPuzzleStateAndButtons();
+                }
+                System.out.println("piece '"+b.id+"' is "+orientation+" at "+b.cells);
             }
 
             greedyBestButton.setEnabled(true);
             ucsButton.setEnabled(true);
-            aStarButton.setEnabled(true);
+            aStarButton.setEnabled(true); // kLocation is confirmed non-null here
 
-            renderGrid(gridState, gridRows, gridColumns);
+            renderGrid(this.gridState, this.gridRows, this.gridColumns);
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                "Error reading file: " + e.getMessage(),
-                "File Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error saat membaca file: " + e.getMessage(), "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+            resetPuzzleStateAndButtons();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Format angka salah di header file: " + e.getMessage(), "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+            resetPuzzleStateAndButtons();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Format header file tidak benar: " + e.getMessage(), "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
+            resetPuzzleStateAndButtons();
         }
     }
 
-    public void moveUp(BlockGroup g) {
+    // Helper untuk reset keadaan puzzle dan buat tombol solver grayed out
+    private void resetPuzzleStateAndButtons() {
+        this.gridState = null;
+        this.kLocation = null;
+        this.gridRows = 0;
+        this.gridColumns = 0;
+        greedyBestButton.setEnabled(false);
+        ucsButton.setEnabled(false);
+        aStarButton.setEnabled(false);
+        gridPanel.removeAll();
+        gridPanel.revalidate();
+        gridPanel.repaint();
+    }
+
+    public void moveUp(Piece g) {
         if (g.isHorizontal()) {
-            System.out.println("Tidak bisa ke up: piece horizontal");
+            System.out.println("Tidak bisa ke atas: piece horizontal");
             return;
         }
         // cari baris paling atas dari group
         int minR = g.cells.stream().mapToInt(p->p.x).min().getAsInt();
         int col  = g.cells.get(0).y;
         if (minR == 0 || gridState[minR-1][col] != '.') {
-            System.out.println("Tidak bisa ke up: tabrakan dengan piece lain atau di sisi atas");
+            System.out.println("Tidak bisa ke atas: tabrakan dengan piece lain atau di sisi atas");
             return;
         }
         // bersihkan yang sebelumnya
@@ -243,15 +397,15 @@ public class GUI extends JFrame {
         renderGrid(gridState, gridRows, gridColumns);
     }
 
-    public void moveDown(BlockGroup g) {
+    public void moveDown(Piece g) {
         if (g.isHorizontal()) {
-            System.out.println("Tidak bisa ke down: piece horizontal");
+            System.out.println("Tidak bisa ke bawah: piece horizontal");
             return;
         }
         int maxR = g.cells.stream().mapToInt(p->p.x).max().getAsInt();
         int col  = g.cells.get(0).y;
         if (maxR == gridRows-1 || gridState[maxR+1][col] != '.') {
-            System.out.println("Tidak bisa ke down: tabrakan dengan piece lain atau di sisi bawah");
+            System.out.println("Tidak bisa ke bawah: tabrakan dengan piece lain atau di sisi bawah");
             return;
         }
         for (Point p : g.cells) gridState[p.x][p.y] = '.';
@@ -262,15 +416,15 @@ public class GUI extends JFrame {
         renderGrid(gridState, gridRows, gridColumns);
     }
 
-    public void moveLeft(BlockGroup g) {
+    public void moveLeft(Piece g) {
         if (!g.isHorizontal()) {
-            System.out.println("Tidak bisa ke left: piece vertikal");
+            System.out.println("Tidak bisa ke kiri: piece vertikal");
             return;
         }
         int row = g.cells.get(0).x;
         int minC = g.cells.stream().mapToInt(p->p.y).min().getAsInt();
         if (minC == 0 || gridState[row][minC-1] != '.') {
-            System.out.println("Tidak bisa ke left: tabrakan dengan piece lain atau di sisi kiri");
+            System.out.println("Tidak bisa ke kiri: tabrakan dengan piece lain atau di sisi kiri");
             return;
         }
         for (Point p : g.cells) gridState[p.x][p.y] = '.';
@@ -281,15 +435,15 @@ public class GUI extends JFrame {
         renderGrid(gridState, gridRows, gridColumns);
     }
 
-    public void moveRight(BlockGroup g) {
+    public void moveRight(Piece g) {
         if (!g.isHorizontal()) {
-            System.out.println("Tidak bisa ke right: piece vertikal");
+            System.out.println("Tidak bisa ke kanan: piece vertikal");
             return;
         }
         int row = g.cells.get(0).x;
         int maxC = g.cells.stream().mapToInt(p->p.y).max().getAsInt();
         if (maxC == gridColumns-1 || gridState[row][maxC+1] != '.') {
-            System.out.println("Tidak bisa ke right: tabrakan dengan piece lain atau di sisi kanan");
+            System.out.println("Tidak bisa ke kanan: tabrakan dengan piece lain atau di sisi kanan");
             return;
         }
         for (Point p : g.cells) gridState[p.x][p.y] = '.';
@@ -372,53 +526,55 @@ public class GUI extends JFrame {
         gridPanel.repaint();
     }
 
-    /** one connected piece of identical chars */
-    private static class BlockGroup {
-        final char id;
-        final List<Point> cells = new ArrayList<>();
-        BlockGroup(char id) { this.id = id; }
-
-        /** 
-         * @return true if this piece occupies a single row and spans at least two columns
-         *         false otherwise (including vertical pieces or single‐tile pieces)
-         */
-        public boolean isHorizontal() {
-            if (cells.size() < 2) return false;
-            // int row0 = cells.get(0).x;
-            // int col0 = cells.get(0).y;
-
-            // check if horizontal
-            if ((cells.get(1).x == cells.get(0).x) && (cells.get(1).y != cells.get(0).y)) {
-                return true;
-            }
-            // else, check if vertical
-            else if ((cells.get(1).x != cells.get(0).x) && (cells.get(1).y == cells.get(0).y)) {
-                return false;
-            } 
-            // else, if neither
-            else {
-                System.out.println("An abnormal piece detected");
-                System.exit(0);
-            }
-
-            // for (Point p : cells) {
-            //     if (p.x != row0) return false;
-            // }
-            return false;
+    public static class AbnormalPieceException extends RuntimeException {
+        public AbnormalPieceException(String message) {
+            super(message);
         }
     }
 
-    /** scan the grid and return each connected piece as a BlockGroup */
-    private List<BlockGroup> findBlockGroups(char[][] grid, int rows, int cols) {
+    // kumpulan cell yang saling terhubung
+    private static class Piece {
+        final char id;
+        final List<Point> cells = new ArrayList<>();
+        Piece(char id) { this.id = id; }
+
+        // return true kalau horizontal, false kalau vertikal, pop up window kalau dua-duanya baris dan kolom >= 2 (hanya boleh salah satu)
+        public boolean isHorizontal() {
+            if (cells.size() < 2) {
+                throw new AbnormalPieceException("Piece " + id + " abnormal");
+                // System.err.println("Piece " + id + " berukuran 1x1 atau lebih kecil");
+                // System.exit(0);
+            }
+            // int row0 = cells.get(0).x;
+            // int col0 = cells.get(0).y;
+
+            // cek kalau horizontal
+            if ((cells.get(1).x == cells.get(0).x) && (cells.get(1).y != cells.get(0).y)) {
+                return true;
+            }
+            // kalau bukan, cek apakah vertikal
+            else if ((cells.get(1).x != cells.get(0).x) && (cells.get(1).y == cells.get(0).y)) {
+                return false;
+            } 
+            // kalau bukan keduanya, ada yang salah
+            else {
+                throw new AbnormalPieceException("Piece " + id + " abnormal");
+            }
+            // return false;
+        }
+    }
+
+    /** iterasi grid, return each connected piece as a BlockGroup */
+    private List<Piece> findPieces(char[][] grid, int rows, int cols) {
         boolean[][] used = new boolean[rows][cols];
-        List<BlockGroup> groups = new ArrayList<>();
+        List<Piece> groups = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 char c = grid[i][j];
                 if (c==' '||c=='.'|| used[i][j]) continue;
 
-                BlockGroup g = new BlockGroup(c);
+                Piece g = new Piece(c);
                 used[i][j] = true;
                 g.cells.add(new Point(i,j));
 
@@ -492,29 +648,27 @@ public class GUI extends JFrame {
         }
     }
 
-    // Heuristic: Manhattan distance from closest cell of 'P' to K's location
-    private int calculateHeuristic(char[][] currentBoard, int r, int c, Point kGoalLocation) {
-        if (kGoalLocation == null) return Integer.MAX_VALUE; // Should not happen if K was found
+    // Heuristic: Manhattan distance dari cell terdekat 'P' ke K
+    private int calculateHCost(char[][] currentBoard, int r, int c, Point exitLocation) {
+        if (exitLocation == null) return Integer.MAX_VALUE;
 
-        BlockGroup pBlock = null;
-        List<BlockGroup> groups = findBlockGroups(currentBoard, r, c);
-        for (BlockGroup group : groups) {
+        Piece primaryPiece = null;
+        List<Piece> groups = findPieces(currentBoard, r, c);
+        for (Piece group : groups) {
             if (group.id == 'P') {
-                pBlock = group;
+                primaryPiece = group;
                 break;
             }
         }
 
-        if (pBlock == null || pBlock.cells.isEmpty()) {
-            return Integer.MAX_VALUE; // 'P' not found
+        if (primaryPiece == null || primaryPiece.cells.isEmpty()) {
+            return Integer.MAX_VALUE; // 'P' tidak ketemu
         }
 
         int minManhattanDistance = Integer.MAX_VALUE;
-        for (Point pCell : pBlock.cells) {
-            int dist = Math.abs(pCell.x - kGoalLocation.x) + Math.abs(pCell.y - kGoalLocation.y);
-            if (dist < minManhattanDistance) {
-                minManhattanDistance = dist;
-            }
+        for (Point primaryCell : primaryPiece.cells) {
+            int dist = Math.abs(primaryCell.x - exitLocation.x) + Math.abs(primaryCell.y - exitLocation.y);
+            minManhattanDistance = Math.min(minManhattanDistance, dist);
         }
         return minManhattanDistance;
     }
@@ -522,9 +676,9 @@ public class GUI extends JFrame {
     private boolean isGoalState(char[][] currentBoard, int r, int c, Point kGoalLocation) {
         if (kGoalLocation == null) return false;
 
-        BlockGroup pBlock = null;
-        List<BlockGroup> groups = findBlockGroups(currentBoard, r, c);
-        for (BlockGroup group : groups) {
+        Piece pBlock = null;
+        List<Piece> groups = findPieces(currentBoard, r, c);
+        for (Piece group : groups) {
             if (group.id == 'P') {
                 pBlock = group;
                 break;
@@ -557,16 +711,16 @@ public class GUI extends JFrame {
         int r = currentState.boardRows;
         int c = currentState.boardCols;
 
-        List<BlockGroup> blockGroups = findBlockGroups(currentBoard, r, c);
+        List<Piece> blockGroups = findPieces(currentBoard, r, c);
 
-        for (BlockGroup group : blockGroups) {
+        for (Piece group : blockGroups) {
             if (group.cells.isEmpty()) continue;
 
             // Coba ke atas
             if (!group.isHorizontal() || group.cells.size() == 1) { // Vertical or single blocks can try to move vertically
                 char[][] nextBoardUp = tryMoveGroup(currentBoard, group, r, c, -1, 0);
                 if (nextBoardUp != null) {
-                    int h = calculateHeuristic(nextBoardUp, r, c, kGoalLocation);
+                    int h = calculateHCost(nextBoardUp, r, c, kGoalLocation);
                     successors.add(new PuzzleState(nextBoardUp, currentState.gCost + 1, h, currentState, group.id + "_UP", r, c));
                 }
             }
@@ -574,7 +728,7 @@ public class GUI extends JFrame {
             if (!group.isHorizontal() || group.cells.size() == 1) {
                 char[][] nextBoardDown = tryMoveGroup(currentBoard, group, r, c, 1, 0);
                 if (nextBoardDown != null) {
-                    int h = calculateHeuristic(nextBoardDown, r, c, kGoalLocation);
+                    int h = calculateHCost(nextBoardDown, r, c, kGoalLocation);
                     successors.add(new PuzzleState(nextBoardDown, currentState.gCost + 1, h, currentState, group.id + "_DOWN", r, c));
                 }
             }
@@ -582,7 +736,7 @@ public class GUI extends JFrame {
             if (group.isHorizontal() || group.cells.size() == 1) { // Horizontal or single blocks can try to move horizontally
                 char[][] nextBoardLeft = tryMoveGroup(currentBoard, group, r, c, 0, -1);
                 if (nextBoardLeft != null) {
-                    int h = calculateHeuristic(nextBoardLeft, r, c, kGoalLocation);
+                    int h = calculateHCost(nextBoardLeft, r, c, kGoalLocation);
                     successors.add(new PuzzleState(nextBoardLeft, currentState.gCost + 1, h, currentState, group.id + "_LEFT", r, c));
                 }
             }
@@ -590,7 +744,7 @@ public class GUI extends JFrame {
             if (group.isHorizontal() || group.cells.size() == 1) {
                 char[][] nextBoardRight = tryMoveGroup(currentBoard, group, r, c, 0, 1);
                 if (nextBoardRight != null) {
-                    int h = calculateHeuristic(nextBoardRight, r, c, kGoalLocation);
+                    int h = calculateHCost(nextBoardRight, r, c, kGoalLocation);
                     successors.add(new PuzzleState(nextBoardRight, currentState.gCost + 1, h, currentState, group.id + "_RIGHT", r, c));
                 }
             }
@@ -599,7 +753,7 @@ public class GUI extends JFrame {
     }
 
     // Helper untuk mencoba pergerakan dan return keadaan board baru, atau null kalau tdk valid
-    private char[][] tryMoveGroup(char[][] board, BlockGroup group, int rows, int cols, int dRow, int dCol) {
+    private char[][] tryMoveGroup(char[][] board, Piece group, int rows, int cols, int dRow, int dCol) {
         char[][] newBoard = deepCopyBoard(board, rows, cols);
 
         // Bersihkan cell sekarang sebuah group pada newBoard secara sementara
@@ -639,6 +793,7 @@ public class GUI extends JFrame {
         animationTimer = new Timer(700, e -> performNextAnimationStep());
         // Mulai pergerakan pertama langsung
         animationTimer.setInitialDelay(0);
+        this.animationStartTime = System.currentTimeMillis();
         animationTimer.start();
     }
 
@@ -648,22 +803,22 @@ public class GUI extends JFrame {
             char pieceId = move.charAt(0);
             String direction = move.substring(move.indexOf('_') + 1);
 
-            // We need to find the BlockGroup in the current gridState
-            List<BlockGroup> currentGroups = findBlockGroups(this.gridState, this.gridRows, this.gridColumns);
-            BlockGroup targetGroup = null;
-            for (BlockGroup bg : currentGroups) {
+            // Cari piece pada gridState sekarang
+            List<Piece> currentPieces = findPieces(this.gridState, this.gridRows, this.gridColumns);
+            Piece targetPiece = null;
+            for (Piece bg : currentPieces) {
                 if (bg.id == pieceId) {
-                    targetGroup = bg;
+                    targetPiece = bg;
                     break;
                 }
             }
 
-            if (targetGroup != null) {
+            if (targetPiece != null) {
                 System.out.println("Animasi pergerakan: " + move);
-                if ("UP".equals(direction)) { moveUp(targetGroup); }
-                else if ("DOWN".equals(direction)) { moveDown(targetGroup); }
-                else if ("LEFT".equals(direction)) { moveLeft(targetGroup); }
-                else if ("RIGHT".equals(direction)) { moveRight(targetGroup); }
+                if ("UP".equals(direction)) { moveUp(targetPiece); }
+                else if ("DOWN".equals(direction)) { moveDown(targetPiece); }
+                else if ("LEFT".equals(direction)) { moveLeft(targetPiece); }
+                else if ("RIGHT".equals(direction)) { moveRight(targetPiece); }
             } else {
                 System.err.println("Error pada animasi: Tidak ada piece '" + pieceId + "' untuk pergerakan " + move);
                 // Stop animasi/skip?
@@ -671,10 +826,14 @@ public class GUI extends JFrame {
             animationMoveIndex++;
         } else {
             animationTimer.stop();
+            long animationEndTime = System.currentTimeMillis();
+            long animationTime = animationEndTime - animationStartTime;
             System.out.println("Animation finished.");
-            JOptionPane.showMessageDialog(this,
-                    "Solusi ditemukan!\n" + currentSolutionPathForAnimation.size() + " pergerakan.",
-                    "Solusi A* sudah dianimasikan", JOptionPane.INFORMATION_MESSAGE);
+            String output = "Solusi ditemukan dalam " + currentSolutionPathForAnimation.size() + " pergerakan." +
+                            "\nWaktu pencarian: " + this.searchExecutionTime + " ms" +
+                            "\nDurasi animasi: " + animationTime + " ms";
+            JOptionPane.showMessageDialog(this, output, "Solusi", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(output);
             aStarButton.setEnabled(true);
             loadButton.setEnabled(true);
             greedyBestButton.setEnabled(gridState != null);
@@ -682,13 +841,14 @@ public class GUI extends JFrame {
         }
     }
 
-    public List<String> solveAStar() {
+    public List<String> solveAStar(long startTimeMillis) { // Added startTimeMillis
         if (this.gridState == null) {
             System.out.println("Tidak ada board yang di-load.");
             return null;
         }
         if (this.kLocation == null) {
             System.out.println("Tidak ada 'K'. Tidak bisa dicari solusinya");
+            // This popup is fine as it's a pre-condition fail, not a search fail.
             JOptionPane.showMessageDialog(this, "Tidak ada 'K' (tujuan). Tidak bisa dicari solusinya.", "Error (A*)", JOptionPane.ERROR_MESSAGE);
             return null;
         }
@@ -697,19 +857,22 @@ public class GUI extends JFrame {
         Set<String> closedSet = new HashSet<>();
 
         char[][] initialBoard = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns);
-        int initialHCost = calculateHeuristic(initialBoard, this.gridRows, this.gridColumns, this.kLocation);
+        int initialHCost = calculateHCost(initialBoard, this.gridRows, this.gridColumns, this.kLocation);
         PuzzleState initialState = new PuzzleState(initialBoard, 0, initialHCost, null, "START", this.gridRows, this.gridColumns);
 
         openSet.add(initialState);
 
         int iterations = 0;
-        final int MAX_ITERATIONS = 500000; // Jika terlalu lama
+        final int MAX_ITERATIONS = 500000; 
 
         while (!openSet.isEmpty()) {
             iterations++;
             if (iterations > MAX_ITERATIONS) {
+                long execTimeSoFar = System.currentTimeMillis() - startTimeMillis;
                 System.out.println("Batas iterasi A* (" + MAX_ITERATIONS + ") tercapai.");
-                JOptionPane.showMessageDialog(this, "Batas iterasi A* (" + MAX_ITERATIONS + ") tercapai.", "Perhatian (A*)", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Batas iterasi A* (" + MAX_ITERATIONS + ") tercapai.\nWaktu eksekusi: " + execTimeSoFar + " ms",
+                        "Perhatian (A*)", JOptionPane.WARNING_MESSAGE);
                 return null;
             }
 
@@ -733,8 +896,11 @@ public class GUI extends JFrame {
                 }
             }
         }
+        long execTimeSoFar = System.currentTimeMillis() - startTimeMillis;
         System.out.println("Tidak ada solusi A* yang ketemu setelah " + iterations + " iterasi.");
-        JOptionPane.showMessageDialog(this, "Tidak ada solusi A* yang ketemu setelah " + iterations + " iterasi.", "Hasil (A*)", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,
+                "Tidak ada solusi A* yang ketemu setelah " + iterations + " iterasi.\nWaktu eksekusi: " + execTimeSoFar + " ms",
+                "Hasil (A*)", JOptionPane.INFORMATION_MESSAGE);
         return null;
     }
 
@@ -747,6 +913,143 @@ public class GUI extends JFrame {
         }
         Collections.reverse(path);
         return path;
+    }
+
+    public List<String> solveGreedyBestFirstSearch(long startTimeMillis) { // Added startTimeMillis
+        if (this.gridState == null) {
+            System.out.println("Tidak ada board yang di-load (GBFS).");
+            return null;
+        }
+        if (this.kLocation == null) {
+            System.out.println("Tidak ada 'K'. Tidak bisa dicari solusinya (GBFS).");
+            JOptionPane.showMessageDialog(this, "Tidak ada 'K' (tujuan). Tidak bisa dicari solusinya (GBFS).", "Error (GBFS)", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        PriorityQueue<PuzzleState> openSet = new PriorityQueue<>(Comparator.comparingInt(state -> state.hCost));
+        Set<String> closedSet = new HashSet<>();
+
+        char[][] initialBoard = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns);
+        int initialHCost = calculateHCost(initialBoard, this.gridRows, this.gridColumns, this.kLocation);
+        PuzzleState initialState = new PuzzleState(initialBoard, 0, initialHCost, null, "START", this.gridRows, this.gridColumns);
+
+        openSet.add(initialState);
+
+        int iterations = 0;
+        final int MAX_ITERATIONS = 500000; 
+
+        while (!openSet.isEmpty()) {
+            iterations++;
+            if (iterations > MAX_ITERATIONS) {
+                long execTimeSoFar = System.currentTimeMillis() - startTimeMillis;
+                System.out.println("Batas iterasi GBFS (" + MAX_ITERATIONS + ") tercapai.");
+                JOptionPane.showMessageDialog(this,
+                        "Batas iterasi GBFS (" + MAX_ITERATIONS + ") tercapai.\nWaktu eksekusi: " + execTimeSoFar + " ms",
+                        "Perhatian (GBFS)", JOptionPane.WARNING_MESSAGE);
+                return null;
+            }
+
+            PuzzleState currentState = openSet.poll();
+            String currentBoardStr = currentState.getBoardString();
+
+            if (closedSet.contains(currentBoardStr)) {
+                continue;
+            }
+            closedSet.add(currentBoardStr);
+
+            if (isGoalState(currentState.board, currentState.boardRows, currentState.boardCols, this.kLocation)) {
+                System.out.println("Solusi GBFS ketemu dalam " + iterations + " iterasi! Path length (gCost): " + currentState.gCost);
+                return reconstructPath(currentState);
+            }
+
+            List<PuzzleState> successors = getSuccessors(currentState, this.kLocation);
+            for (PuzzleState successor : successors) {
+                if (!closedSet.contains(successor.getBoardString())) {
+                    openSet.add(successor);
+                }
+            }
+        }
+        long execTimeSoFar = System.currentTimeMillis() - startTimeMillis;
+        System.out.println("Tidak ada solusi Greedy Best First Search yang ketemu setelah " + iterations + " iterasi.");
+        JOptionPane.showMessageDialog(this,
+                "Tidak ada solusi Greedy Best First Search yang ketemu setelah " + iterations + " iterasi.\nWaktu eksekusi: " + execTimeSoFar + " ms",
+                "Hasil (Greedy Best First Search)", JOptionPane.INFORMATION_MESSAGE);
+        return null;
+    }
+
+    public List<String> solveUniformCostSearch(long startTimeMillis) { // Added startTimeMillis
+        if (this.gridState == null) {
+            System.out.println("Tidak ada board yang di-load (Uniform Cost Search).");
+            return null;
+        }
+        if (this.kLocation == null) {
+            System.out.println("Tidak ada 'K'. Tidak bisa dicari solusinya (Uniform Cost Search).");
+            JOptionPane.showMessageDialog(this, "Tidak ada 'K' (tujuan). Tidak bisa dicari solusinya (Uniform Cost Search).", "Error (Uniform Cost Search)", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        PriorityQueue<PuzzleState> openSet = new PriorityQueue<>(Comparator.comparingInt(state -> state.gCost));
+        Map<String, PuzzleState> openSetMap = new HashMap<>(); 
+        Set<String> closedSet = new HashSet<>();
+
+        char[][] initialBoard = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns);
+        int initialHCost = 0; 
+        PuzzleState initialState = new PuzzleState(initialBoard, 0, initialHCost, null, "START", this.gridRows, this.gridColumns);
+
+        openSet.add(initialState);
+        openSetMap.put(initialState.getBoardString(), initialState);
+
+        int iterations = 0;
+        final int MAX_ITERATIONS = 1000000; 
+
+        while (!openSet.isEmpty()) {
+            iterations++;
+            if (iterations > MAX_ITERATIONS) {
+                long execTimeSoFar = System.currentTimeMillis() - startTimeMillis;
+                System.out.println("Batas iterasi UCS (" + MAX_ITERATIONS + ") tercapai.");
+                JOptionPane.showMessageDialog(this,
+                        "Batas iterasi UCS (" + MAX_ITERATIONS + ") tercapai.\nWaktu eksekusi: " + execTimeSoFar + " ms",
+                        "Perhatian (UCS)", JOptionPane.WARNING_MESSAGE);
+                return null;
+            }
+
+            PuzzleState currentState = openSet.poll();
+            String currentBoardStr = currentState.getBoardString();
+            openSetMap.remove(currentBoardStr); 
+
+            if (closedSet.contains(currentBoardStr)) {
+                continue;
+            }
+            closedSet.add(currentBoardStr);
+
+            if (isGoalState(currentState.board, currentState.boardRows, currentState.boardCols, this.kLocation)) {
+                System.out.println("Solusi UCS ketemu dalam " + iterations + " iterasi! Path length (gCost): " + currentState.gCost);
+                return reconstructPath(currentState);
+            }
+
+            List<PuzzleState> successors = getSuccessors(currentState, this.kLocation); 
+            for (PuzzleState successor : successors) {
+                String successorBoardStr = successor.getBoardString();
+                if (closedSet.contains(successorBoardStr)) {
+                    continue;
+                }
+
+                PuzzleState existingInOpen = openSetMap.get(successorBoardStr);
+                if (existingInOpen == null || successor.gCost < existingInOpen.gCost) {
+                    if (existingInOpen != null) {
+                        openSet.remove(existingInOpen); 
+                    }
+                    openSet.add(successor);
+                    openSetMap.put(successorBoardStr, successor);
+                }
+            }
+        }
+        long executionTime = System.currentTimeMillis() - startTimeMillis;
+        System.out.println("Tidak ada solusi UCS yang ketemu setelah " + iterations + " iterasi.");
+        JOptionPane.showMessageDialog(this,
+                "Tidak ada solusi UCS yang ketemu setelah " + iterations + " iterasi.\nWaktu eksekusi: " + executionTime + " ms",
+                "Hasil (UCS)", JOptionPane.INFORMATION_MESSAGE);
+        return null;
     }
 
     public static void main(String[] args) {
