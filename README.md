@@ -2,6 +2,8 @@
 
 ## Penjelasan Singkat
 
+Rush Hour adalah permainan *puzzle* logika berbasis grid yang menantang pemain untuk menggeser kendaraan di dalam sebuah kotak (biasanya berukuran 6x6) agar mobil utama dapat keluar melalui pintu keluar di sisi papan. Setiap kendaraan hanya bisa bergerak lurus ke depan atau ke belakang sesuai dengan orientasinya (horizontal atau vertikal), dan tidak dapat berputar. Tujuan utamanya adalah memindahkan mobil utama ke pintu keluar dengan jumlah langkah seminimal mungkin.
+
 Program ini memecahkan *puzzle* Rush Hour secara otomatis. Ada tiga algoritma yang dipakai, yaitu:
 
 * *Greedy Best-first Search*
