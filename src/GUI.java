@@ -789,8 +789,15 @@ public class GUI extends JFrame {
             int nextC = p.y + dCol;
             // Kalau lewat batas
             if (nextR < 0 || nextR >= rows || nextC < 0 || nextC >= cols) return null; // Lewat batas
+            
+            // Cek apakah target cell adalah lokasi 'K'
+            boolean isTargetKLocation = (this.kLocation != null && nextR == this.kLocation.x && nextC == this.kLocation.y);
+            
             // Kalau tumpang tindih dengan piece lain atau kotak hitam
-            if (newBoard[nextR][nextC] != '.') return null;
+            if (newBoard[nextR][nextC] != '.') { return null; }
+            
+            // Kalau Piece non-primer mencoba masuk ke lokasi 'K'
+            if (isTargetKLocation && group.id != 'P') { return null; }
         }
 
         // Kalau valid, set posisi baru secara permanen pada fresh copy (atau pada newBoard yang baru dimodif)
