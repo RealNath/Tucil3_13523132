@@ -1,0 +1,103 @@
+Algoritma: A Star
+Waktu Eksekusi Algoritma: 54 ms
+Jumlah Langkah: 10
+==============================
+Langkah 0 (Initial State):
+AAB..F 
+..BCDF 
+GPPCDF.
+GH.III 
+GHJ... 
+LLJMM. 
+
+------------------------------
+Langkah 1: I_LEFT
+AAB..F 
+..BCDF 
+GPPCDF.
+GHIII. 
+GHJ... 
+LLJMM. 
+
+------------------------------
+Langkah 2: F_DOWN
+AAB... 
+..BCDF 
+GPPCDF.
+GHIIIF 
+GHJ... 
+LLJMM. 
+
+------------------------------
+Langkah 3: C_UP
+AABC.. 
+..BCDF 
+GPP.DF.
+GHIIIF 
+GHJ... 
+LLJMM. 
+
+------------------------------
+Langkah 4: F_DOWN
+AABC.. 
+..BCD. 
+GPP.DF.
+GHIIIF 
+GHJ..F 
+LLJMM. 
+
+------------------------------
+Langkah 5: F_DOWN
+AABC.. 
+..BCD. 
+GPP.D..
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------
+Langkah 6: P_RIGHT
+AABC.. 
+..BCD. 
+G.PPD..
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------
+Langkah 7: D_UP
+AABCD. 
+..BCD. 
+G.PP...
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------
+Langkah 8: P_RIGHT
+AABCD. 
+..BCD. 
+G..PP..
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------
+Langkah 9: P_RIGHT
+AABCD. 
+..BCD. 
+G...PP.
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------
+Langkah 10: P_RIGHT
+AABCD. 
+..BCD. 
+G....PP
+GHIIIF 
+GHJ..F 
+LLJMMF 
+
+------------------------------

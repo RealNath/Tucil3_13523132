@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.HashSet;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Arrays;
+import java.util.Date;
 
 public class GUI extends JFrame {
     private JPanel gridPanel;
@@ -33,6 +37,10 @@ public class GUI extends JFrame {
     private int animationMoveIndex;
     private long searchExecutionTime;
     private long animationStartTime;
+
+    // Save
+    private List<String> lastSolutionPath = null;
+    private char[][] initialBoardForSolutionSaving = null;
 
     public GUI() {
         setTitle("Block Grid Renderer");
@@ -53,6 +61,8 @@ public class GUI extends JFrame {
             if (animationTimer != null && animationTimer.isRunning()) {
                 animationTimer.stop(); // Stop animasi kalau file baru di-load
             }
+            lastSolutionPath = null;
+            initialBoardForSolutionSaving = null;
             loadFile();
         });
         greedyBestButton.addActionListener(e -> {
@@ -63,6 +73,8 @@ public class GUI extends JFrame {
             if (animationTimer != null && animationTimer.isRunning()) {
                 animationTimer.stop(); // Stop animasi sebelumnya kalau A* dijalankan lagi
             }
+
+            this.initialBoardForSolutionSaving = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns); 
 
             System.out.println("\nGreedy Best First Search Solver Dimulai");
             greedyBestButton.setEnabled(false);
@@ -79,6 +91,9 @@ public class GUI extends JFrame {
 
                 SwingUtilities.invokeLater(() -> {
                     if (solutionPath != null && !solutionPath.isEmpty()) {
+                        this.lastSolutionPath = solutionPath;
+                        saveSolutionStepsToFile(this.lastSolutionPath, this.initialBoardForSolutionSaving, this.gridRows, this.gridColumns, "Greedy Best First Search");
+                        
                         System.out.println("\nPencarian dengan Greedy Best First Search (" + solutionPath.size() + " pergerakan):");
                         for (String move : solutionPath) {
                             System.out.println(move);
@@ -102,8 +117,8 @@ public class GUI extends JFrame {
             if (animationTimer != null && animationTimer.isRunning()) {
                 animationTimer.stop(); // Stop previous animation if UCS is run again
             }
+            this.initialBoardForSolutionSaving = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns);
 
-            System.out.println();
             System.out.println("\nUniform Cost Search Solver Dimulai");
             ucsButton.setEnabled(false);
             loadButton.setEnabled(false);
@@ -120,17 +135,19 @@ public class GUI extends JFrame {
                 SwingUtilities.invokeLater(() -> {
                     if (solutionPath != null && !solutionPath.isEmpty()) {
                         System.out.println("\nPencarian dengan Uniform Cost Search (" + solutionPath.size() + " pergerakan):");
+                        this.lastSolutionPath = solutionPath;
+                        saveSolutionStepsToFile(this.lastSolutionPath, this.initialBoardForSolutionSaving, this.gridRows, this.gridColumns, "Uniform Cost Search");
+                        
                         for (String move : solutionPath) {
                             System.out.println(move);
                         }
-                        animateSolution(solutionPath); // Call animation method
+                        animateSolution(solutionPath);
                     } else {
                         ucsButton.setEnabled(true);
                         loadButton.setEnabled(true);
                         greedyBestButton.setEnabled(gridState != null);
                         aStarButton.setEnabled(gridState != null);
                     }
-                    // Buttons re-enabled by animateSolution or if no solution
                 });
             }).start();
         });
@@ -142,6 +159,7 @@ public class GUI extends JFrame {
             if (animationTimer != null && animationTimer.isRunning()) {
                 animationTimer.stop();
             }
+            this.initialBoardForSolutionSaving = deepCopyBoard(this.gridState, this.gridRows, this.gridColumns);
 
             System.out.println("\nA* Solver Dimulai");
             aStarButton.setEnabled(false);
@@ -159,6 +177,9 @@ public class GUI extends JFrame {
                 SwingUtilities.invokeLater(() -> {
                     if (solutionPath != null && !solutionPath.isEmpty()) {
                         System.out.println("\nPencarian dengan A* (" + solutionPath.size() + " pergerakan):");
+                        this.lastSolutionPath = solutionPath;
+                        saveSolutionStepsToFile(this.lastSolutionPath, this.initialBoardForSolutionSaving, this.gridRows, this.gridColumns, "A Star");
+                        
                         for (String move : solutionPath) {
                             System.out.println(move);
                         }
@@ -1050,6 +1071,120 @@ public class GUI extends JFrame {
                 "Tidak ada solusi UCS yang ketemu setelah " + iterations + " iterasi.\nWaktu eksekusi: " + executionTime + " ms",
                 "Hasil (UCS)", JOptionPane.INFORMATION_MESSAGE);
         return null;
+    }
+
+    // Helper untuk mengubah board jadi string
+    private String boardToString(char[][] board, int rows, int cols) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                sb.append(board[i][j]);
+            }
+            sb.append(System.lineSeparator()); // Baris baru setelah tiap baris grid
+        }
+        return sb.toString();
+    }
+
+    // Helper untuk menerapkan satu langkah pergerakan ke board dan mengembalikan keadaan board baru
+    // Ini untuk tujuan simulasi, asumsi pergerakan valid karena berasal dari solusi.
+    private char[][] applyMoveToBoard(char[][] board, int rows, int cols, String moveString) {
+        char pieceId = moveString.charAt(0);
+        String direction = moveString.substring(moveString.indexOf('_') + 1);
+
+        // Buat copy-an baru untuk dimodif
+        char[][] newBoard = deepCopyBoard(board, rows, cols);
+
+        // Temukan piece pada board *asli* (atau newBoard sebelum modifikasi)
+        // untuk mengetahui sel-selnya saat ini.
+        List<Piece> pieces = findPieces(board, rows, cols); // Gunakan 'board' yang dilewatkan
+        Piece targetPiece = null;
+        for (Piece p : pieces) {
+            if (p.id == pieceId) {
+                targetPiece = p; // Piece ini berisi sel-sel dari 'board'
+                break;
+            }
+        }
+
+        if (targetPiece == null) {
+            System.err.println("Error saat menerapkan pergerakan untuk simpan: Piece '" + pieceId + "' tidak ditemukan.");
+            return null; // Indikasikan error
+        }
+
+        // 1. Bersihkan posisi lama piece pada newBoard
+        for (Point cell : targetPiece.cells) {
+            newBoard[cell.x][cell.y] = '.';
+        }
+
+        // 2. Tempatkan piece pada posisi barunya di newBoard
+        int dRow = 0, dCol = 0;
+        if ("UP".equals(direction)) dRow = -1;
+        else if ("DOWN".equals(direction)) dRow = 1;
+        else if ("LEFT".equals(direction)) dCol = -1;
+        else if ("RIGHT".equals(direction)) dCol = 1;
+
+        for (Point cell : targetPiece.cells) {
+            int newX = cell.x + dRow;
+            int newY = cell.y + dCol;
+            // Pemeriksaan batas dasar, meskipun path solusi seharusnya tidak melanggar ini.
+            if (newX >= 0 && newX < rows && newY >= 0 && newY < cols) {
+                newBoard[newX][newY] = targetPiece.id;
+            } else {
+                System.err.println("Error saat menerapkan pergerakan untuk simpan: Pergerakan keluar batas untuk piece " + targetPiece.id);
+                return null;
+            }
+        }
+        return newBoard;
+    }
+
+    // Menyimpan langkah-langkah solusi ke file
+    private void saveSolutionStepsToFile(List<String> solutionPath, char[][] initialGrid, int r, int c, String algorithm) {
+        if (solutionPath == null || solutionPath.isEmpty() || initialGrid == null) {
+            System.err.println("Tidak ada data solusi valid untuk disimpan");
+            return;
+        }
+
+        // Nama file
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fileName = "solusi_" + algorithm.replaceAll("\\s+", "") + "_" + timeStamp + ".txt";
+
+        // Tempat penyimpanan
+        File outputDir = new File("..\\test");
+        if (!outputDir.exists()) {
+            outputDir.mkdirs();
+        }
+        File fileToSave = new File(outputDir, fileName);
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileToSave))) {
+            char[][] currentBoardState = deepCopyBoard(initialGrid, r, c);
+
+            writer.println("Algoritma: " + algorithm);
+            writer.println("Waktu Eksekusi Algoritma: " + this.searchExecutionTime + " ms");
+            writer.println("Jumlah Langkah: " + solutionPath.size());
+            writer.println("==============================");
+            writer.println("Langkah 0 (Initial State):");
+            writer.println(boardToString(currentBoardState, r, c));
+            writer.println("------------------------------");
+
+            for (int i = 0; i < solutionPath.size(); i++) {
+                String move = solutionPath.get(i);
+                
+                char[][] nextBoardState = applyMoveToBoard(currentBoardState, r, c, move);
+                if (nextBoardState == null) { 
+                    writer.println("Error saat menerapkan pergerakan: " + move);
+                    System.err.println("Error saat menerapkan pergerakan " + move + " selama penyimpanan solusi.");
+                    break;
+                }
+                currentBoardState = nextBoardState; // Update untuk iterasi berikutnya
+
+                writer.println("Langkah " + (i+1) + ": " + move);
+                writer.println(boardToString(currentBoardState, r, c));
+                writer.println("------------------------------");
+            }
+            JOptionPane.showMessageDialog(this, "Langkah solusi berhasil disimpan ke:\n" + fileToSave.getAbsolutePath(), "Simpan Berhasil", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saat menyimpan file: " + ex.getMessage(), "Error Simpan File", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

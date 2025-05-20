@@ -1,0 +1,229 @@
+Algoritma: A Star
+Waktu Eksekusi Algoritma: 45 ms
+Jumlah Langkah: 24
+==============================
+Langkah 0 (Initial State):
+AAAB.. 
+DCCBJJ 
+DPPB.I.
+D.EGGI 
+..E.HI 
+FFF.H. 
+
+------------------------------
+Langkah 1: D_DOWN
+AAAB.. 
+.CCBJJ 
+DPPB.I.
+D.EGGI 
+D.E.HI 
+FFF.H. 
+
+------------------------------
+Langkah 2: F_RIGHT
+AAAB.. 
+.CCBJJ 
+DPPB.I.
+D.EGGI 
+D.E.HI 
+.FFFH. 
+
+------------------------------
+Langkah 3: D_DOWN
+AAAB.. 
+.CCBJJ 
+.PPB.I.
+D.EGGI 
+D.E.HI 
+DFFFH. 
+
+------------------------------
+Langkah 4: P_LEFT
+AAAB.. 
+.CCBJJ 
+PP.B.I.
+D.EGGI 
+D.E.HI 
+DFFFH. 
+
+------------------------------
+Langkah 5: E_UP
+AAAB.. 
+.CCBJJ 
+PPEB.I.
+D.EGGI 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 6: C_LEFT
+AAAB.. 
+CC.BJJ 
+PPEB.I.
+D.EGGI 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 7: E_UP
+AAAB.. 
+CCEBJJ 
+PPEB.I.
+D..GGI 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 8: G_LEFT
+AAAB.. 
+CCEBJJ 
+PPEB.I.
+D.GG.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 9: G_LEFT
+AAAB.. 
+CCEBJJ 
+PPEB.I.
+DGG..I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 10: B_DOWN
+AAA... 
+CCEBJJ 
+PPEB.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 11: A_RIGHT
+.AAA.. 
+CCEBJJ 
+PPEB.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 12: A_RIGHT
+..AAA. 
+CCEBJJ 
+PPEB.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 13: A_RIGHT
+...AAA 
+CCEBJJ 
+PPEB.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 14: E_UP
+..EAAA 
+CCEBJJ 
+PP.B.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 15: P_RIGHT
+..EAAA 
+CCEBJJ 
+.PPB.I.
+DGGB.I 
+D...HI 
+DFFFH. 
+
+------------------------------
+Langkah 16: D_UP
+..EAAA 
+CCEBJJ 
+DPPB.I.
+DGGB.I 
+D...HI 
+.FFFH. 
+
+------------------------------
+Langkah 17: I_DOWN
+..EAAA 
+CCEBJJ 
+DPPB...
+DGGB.I 
+D...HI 
+.FFFHI 
+
+------------------------------
+Langkah 18: B_DOWN
+..EAAA 
+CCE.JJ 
+DPPB...
+DGGB.I 
+D..BHI 
+.FFFHI 
+
+------------------------------
+Langkah 19: F_LEFT
+..EAAA 
+CCE.JJ 
+DPPB...
+DGGB.I 
+D..BHI 
+FFF.HI 
+
+------------------------------
+Langkah 20: B_DOWN
+..EAAA 
+CCE.JJ 
+DPP....
+DGGB.I 
+D..BHI 
+FFFBHI 
+
+------------------------------
+Langkah 21: P_RIGHT
+..EAAA 
+CCE.JJ 
+D.PP...
+DGGB.I 
+D..BHI 
+FFFBHI 
+
+------------------------------
+Langkah 22: P_RIGHT
+..EAAA 
+CCE.JJ 
+D..PP..
+DGGB.I 
+D..BHI 
+FFFBHI 
+
+------------------------------
+Langkah 23: P_RIGHT
+..EAAA 
+CCE.JJ 
+D...PP.
+DGGB.I 
+D..BHI 
+FFFBHI 
+
+------------------------------
+Langkah 24: P_RIGHT
+..EAAA 
+CCE.JJ 
+D....PP
+DGGB.I 
+D..BHI 
+FFFBHI 
+
+------------------------------
