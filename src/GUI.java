@@ -283,7 +283,7 @@ public class GUI extends JFrame {
             int col = Integer.parseInt(dimensionsStr[1]);
 
             // Baris kedua
-            if (reader.readLine() == null) { // piecesLine
+            if (reader.readLine() == null) {
                 JOptionPane.showMessageDialog(this, "File tidak lengkap, baris kedua (jumlah piece) hilang.", "Error (File Teks)", JOptionPane.ERROR_MESSAGE);
                 resetPuzzleStateAndButtons();
                 return;
@@ -301,7 +301,7 @@ public class GUI extends JFrame {
 
             newGridData = new char[gridRow][gridCol];
 
-            // 3. Read grid data and Validate 'K' Position
+            // Baca data pada grid dan validasi posisi 'K'
             for (int i = 0; i < gridRow; i++) {
                 String line = reader.readLine();
                 if (line == null) {
@@ -320,12 +320,12 @@ public class GUI extends JFrame {
                                 return;
                             }
                             newKLocationFromFile = new Point(i, j);
-                            newGridData[i][j] = '.'; // Replace 'K' with '.' for solver logic
+                            newGridData[i][j] = '.'; // Ganti 'K' dengan '.' untuk logika solver nya
                         } else {
                             newGridData[i][j] = c;
                         }
                     } else {
-                        newGridData[i][j] = ' '; // Fill short lines with spaces (or '.')
+                        newGridData[i][j] = ' '; // Cell hitam di samping/atas/bawah K
                     }
                 }
             }
@@ -337,13 +337,13 @@ public class GUI extends JFrame {
                 return;
             }
 
-            // If all validations pass, update the GUI state
+            // Kalau lulus semua validasi
             this.gridState = newGridData;
             this.kLocation = newKLocationFromFile;
             this.gridRows = gridRow;
             this.gridColumns = gridCol;
 
-            // For debugging piece identification:
+            // Debug array koordinat tiap piece
             List<Piece> pieces = findPieces(this.gridState, this.gridRows, this.gridColumns);
             System.out.println("\nPiece ditemukan di " + file.getName() + ":");
             for (Piece b : pieces) {
@@ -366,7 +366,7 @@ public class GUI extends JFrame {
 
             greedyBestButton.setEnabled(true);
             ucsButton.setEnabled(true);
-            aStarButton.setEnabled(true); // kLocation is confirmed non-null here
+            aStarButton.setEnabled(true);
 
             renderGrid(this.gridState, this.gridRows, this.gridColumns);
 
@@ -477,14 +477,13 @@ public class GUI extends JFrame {
 
     private void renderGrid(
         char[][] grid, int rows, int columns) {
-        // Clear the grid panel and reset layout
+        // Reset grid
         gridPanel.removeAll();
         gridPanel.setLayout(new GridLayout(rows, columns));
         
-        // Create a 2D array to hold all cell panels
         JPanel[][] cells = new JPanel[rows][columns];
         
-        // First create all cells
+        // Buat cell
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 cells[i][j] = new JPanel();
@@ -493,7 +492,7 @@ public class GUI extends JFrame {
             }
         }
         
-        // Now set colors and content for each cell
+        // Warna cell dan label
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 char c = grid[i][j];
@@ -520,7 +519,7 @@ public class GUI extends JFrame {
                     }
                     cells[i][j].setBackground(colorMap.get(c));
                     
-                    // Add character label
+                    // Label
                     JLabel label = new JLabel(String.valueOf(c), JLabel.CENTER);
                     label.setForeground(Color.WHITE);
                     cells[i][j].add(label, BorderLayout.CENTER);
@@ -528,14 +527,7 @@ public class GUI extends JFrame {
             }
         }
         
-        // Example: Set specific colors manually
-        // cells[2][3].setBackground(Color.RED);  // Set cell at row 2, column 3 to red
-        // cells[4][1].setBackground(Color.BLUE); // Set cell at row 4, column 1 to blue
-        
-        // Example: Copy color from one cell to another
-        // cells[5][2].setBackground(cells[1][1].getBackground());
-        
-        // Add cells to grid panel in order
+        // Tambahkan cell pada grid panel
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 gridPanel.add(cells[i][j]);
@@ -585,7 +577,7 @@ public class GUI extends JFrame {
         }
     }
 
-    /** iterasi grid, return each connected piece as a BlockGroup */
+    // iterasi grid, return tiap cell yang terhubung dengan huruf/id sama sebagai piece
     private List<Piece> findPieces(char[][] grid, int rows, int cols) {
         boolean[][] used = new boolean[rows][cols];
         List<Piece> groups = new ArrayList<>();
@@ -599,21 +591,21 @@ public class GUI extends JFrame {
                 used[i][j] = true;
                 g.cells.add(new Point(i,j));
 
-                // check horizontal
+                // cek kalau horizontal
                 if (j+1<cols && grid[i][j+1]==c) {
                     for (int x=j+1; x<cols && grid[i][x]==c; x++) {
                         used[i][x]=true;
                         g.cells.add(new Point(i,x));
                     }
                 }
-                // else check vertical
+                // kalau bukan, cek kalau vertical
                 else if (i+1<rows && grid[i+1][j]==c) {
                     for (int y=i+1; y<rows && grid[y][j]==c; y++) {
                         used[y][j]=true;
                         g.cells.add(new Point(y,j));
                     }
                 }
-                // else it remains a single‐tile group
+                // else (?)
 
                 groups.add(g);
             }
@@ -621,7 +613,7 @@ public class GUI extends JFrame {
         return groups;
     }
 
-    // Helper class for A* states
+    // Helper untuk keadaan A*
     class PuzzleState {
         char[][] board;
         int gCost; // Nilai/harga dari start ke state ini
@@ -707,12 +699,13 @@ public class GUI extends JFrame {
         }
 
         if (pBlock == null) {
-            return false; // 'P' not found
+            return false;
         }
 
+        // Kalau sebagian P ada di cell K
         for (Point pCell : pBlock.cells) {
             if (pCell.x == kGoalLocation.x && pCell.y == kGoalLocation.y) {
-                return true; // A part of 'P' is at K's original location
+                return true;
             }
         }
         return false;
