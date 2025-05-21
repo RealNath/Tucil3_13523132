@@ -12,6 +12,8 @@ Program ini memecahkan *puzzle* Rush Hour secara otomatis. Ada tiga algoritma ya
 
 Heuristik yang dipakai adalah Manhattan *distance*.
 
+Program ini berbasis GUI.
+
 ## Requirement / Keperluan
 
 * Java  
