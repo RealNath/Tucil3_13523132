@@ -812,7 +812,7 @@ public class GUI extends JFrame {
         }
 
         // Update board tiap 700 ms
-        animationTimer = new Timer(700, e -> performNextAnimationStep());
+        animationTimer = new Timer(100, e -> performNextAnimationStep());
         // Mulai pergerakan pertama langsung
         animationTimer.setInitialDelay(0);
         this.animationStartTime = System.currentTimeMillis();
