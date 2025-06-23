@@ -1,0 +1,3802 @@
+Algoritma: Greedy Best First Search
+Waktu Eksekusi Algoritma: 182 ms
+Jumlah Langkah: 421
+==============================
+Langkah 0 (Initial State):
+ABB.E. 
+ACD.EF 
+ACDPPF.
+GGGH.F 
+..IHJJ 
+LLIMM. 
+
+------------------------------
+Langkah 1: M_RIGHT
+ABB.E. 
+ACD.EF 
+ACDPPF.
+GGGH.F 
+..IHJJ 
+LLI.MM 
+
+------------------------------
+Langkah 2: H_DOWN
+ABB.E. 
+ACD.EF 
+ACDPPF.
+GGG..F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 3: G_RIGHT
+ABB.E. 
+ACD.EF 
+ACDPPF.
+.GGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 4: G_RIGHT
+ABB.E. 
+ACD.EF 
+ACDPPF.
+..GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 5: F_UP
+ABB.EF 
+ACD.EF 
+ACDPPF.
+..GGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 6: G_RIGHT
+ABB.EF 
+ACD.EF 
+ACDPPF.
+...GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 7: I_UP
+ABB.EF 
+ACD.EF 
+ACDPPF.
+..IGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 8: L_RIGHT
+ABB.EF 
+ACD.EF 
+ACDPPF.
+..IGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 9: C_DOWN
+ABB.EF 
+A.D.EF 
+ACDPPF.
+.CIGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 10: L_LEFT
+ABB.EF 
+A.D.EF 
+ACDPPF.
+.CIGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 11: I_DOWN
+ABB.EF 
+A.D.EF 
+ACDPPF.
+.C.GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 12: G_LEFT
+ABB.EF 
+A.D.EF 
+ACDPPF.
+.CGGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 13: C_DOWN
+ABB.EF 
+A.D.EF 
+A.DPPF.
+.CGGG. 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 14: G_RIGHT
+ABB.EF 
+A.D.EF 
+A.DPPF.
+.C.GGG 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 15: I_UP
+ABB.EF 
+A.D.EF 
+A.DPPF.
+.CIGGG 
+.CIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 16: L_RIGHT
+ABB.EF 
+A.D.EF 
+A.DPPF.
+.CIGGG 
+.CIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 17: A_DOWN
+.BB.EF 
+A.D.EF 
+A.DPPF.
+ACIGGG 
+.CIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 18: L_LEFT
+.BB.EF 
+A.D.EF 
+A.DPPF.
+ACIGGG 
+.CIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 19: I_DOWN
+.BB.EF 
+A.D.EF 
+A.DPPF.
+AC.GGG 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 20: G_LEFT
+.BB.EF 
+A.D.EF 
+A.DPPF.
+ACGGG. 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 21: C_UP
+.BB.EF 
+A.D.EF 
+ACDPPF.
+ACGGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 22: G_RIGHT
+.BB.EF 
+A.D.EF 
+ACDPPF.
+AC.GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 23: I_UP
+.BB.EF 
+A.D.EF 
+ACDPPF.
+ACIGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 24: L_RIGHT
+.BB.EF 
+A.D.EF 
+ACDPPF.
+ACIGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 25: C_UP
+.BB.EF 
+ACD.EF 
+ACDPPF.
+A.IGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 26: L_LEFT
+.BB.EF 
+ACD.EF 
+ACDPPF.
+A.IGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 27: I_DOWN
+.BB.EF 
+ACD.EF 
+ACDPPF.
+A..GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 28: G_LEFT
+.BB.EF 
+ACD.EF 
+ACDPPF.
+A.GGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 29: G_LEFT
+.BB.EF 
+ACD.EF 
+ACDPPF.
+AGGG.. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 30: A_DOWN
+.BB.EF 
+.CD.EF 
+ACDPPF.
+AGGG.. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 31: G_RIGHT
+.BB.EF 
+.CD.EF 
+ACDPPF.
+A.GGG. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 32: G_RIGHT
+.BB.EF 
+.CD.EF 
+ACDPPF.
+A..GGG 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 33: I_UP
+.BB.EF 
+.CD.EF 
+ACDPPF.
+A.IGGG 
+A.IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 34: L_RIGHT
+.BB.EF 
+.CD.EF 
+ACDPPF.
+A.IGGG 
+A.IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 35: A_DOWN
+.BB.EF 
+.CD.EF 
+.CDPPF.
+A.IGGG 
+A.IHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 36: C_DOWN
+.BB.EF 
+..D.EF 
+.CDPPF.
+ACIGGG 
+A.IHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 37: A_UP
+.BB.EF 
+..D.EF 
+ACDPPF.
+ACIGGG 
+A.IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 38: L_LEFT
+.BB.EF 
+..D.EF 
+ACDPPF.
+ACIGGG 
+A.IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 39: I_DOWN
+.BB.EF 
+..D.EF 
+ACDPPF.
+AC.GGG 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 40: G_LEFT
+.BB.EF 
+..D.EF 
+ACDPPF.
+ACGGG. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 41: C_DOWN
+.BB.EF 
+..D.EF 
+A.DPPF.
+ACGGG. 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 42: G_RIGHT
+.BB.EF 
+..D.EF 
+A.DPPF.
+AC.GGG 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 43: I_UP
+.BB.EF 
+..D.EF 
+A.DPPF.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 44: L_RIGHT
+.BB.EF 
+..D.EF 
+A.DPPF.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 45: A_DOWN
+.BB.EF 
+..D.EF 
+..DPPF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 46: B_RIGHT
+..BBEF 
+..D.EF 
+..DPPF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 47: C_UP
+..BBEF 
+..D.EF 
+.CDPPF.
+ACIGGG 
+A.IHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 48: A_UP
+..BBEF 
+..D.EF 
+ACDPPF.
+ACIGGG 
+A.IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 49: L_LEFT
+..BBEF 
+..D.EF 
+ACDPPF.
+ACIGGG 
+A.IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 50: I_DOWN
+..BBEF 
+..D.EF 
+ACDPPF.
+AC.GGG 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 51: G_LEFT
+..BBEF 
+..D.EF 
+ACDPPF.
+ACGGG. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 52: C_DOWN
+..BBEF 
+..D.EF 
+A.DPPF.
+ACGGG. 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 53: F_DOWN
+..BBE. 
+..D.EF 
+A.DPPF.
+ACGGGF 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 54: C_UP
+..BBE. 
+..D.EF 
+ACDPPF.
+ACGGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 55: C_UP
+..BBE. 
+.CD.EF 
+ACDPPF.
+A.GGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 56: G_LEFT
+..BBE. 
+.CD.EF 
+ACDPPF.
+AGGG.F 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 57: A_UP
+..BBE. 
+ACD.EF 
+ACDPPF.
+AGGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 58: G_RIGHT
+..BBE. 
+ACD.EF 
+ACDPPF.
+A.GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 59: C_DOWN
+..BBE. 
+A.D.EF 
+ACDPPF.
+ACGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 60: C_DOWN
+..BBE. 
+A.D.EF 
+A.DPPF.
+ACGGGF 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 61: B_LEFT
+.BB.E. 
+A.D.EF 
+A.DPPF.
+ACGGGF 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 62: C_UP
+.BB.E. 
+A.D.EF 
+ACDPPF.
+ACGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 63: C_UP
+.BB.E. 
+ACD.EF 
+ACDPPF.
+A.GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 64: A_DOWN
+.BB.E. 
+.CD.EF 
+ACDPPF.
+A.GGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 65: C_DOWN
+.BB.E. 
+..D.EF 
+ACDPPF.
+ACGGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 66: C_DOWN
+.BB.E. 
+..D.EF 
+A.DPPF.
+ACGGGF 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 67: B_LEFT
+BB..E. 
+..D.EF 
+A.DPPF.
+ACGGGF 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 68: C_UP
+BB..E. 
+..D.EF 
+ACDPPF.
+ACGGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 69: A_UP
+BB..E. 
+A.D.EF 
+ACDPPF.
+ACGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 70: C_DOWN
+BB..E. 
+A.D.EF 
+A.DPPF.
+ACGGGF 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 71: F_UP
+BB..EF 
+A.D.EF 
+A.DPPF.
+ACGGG. 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 72: G_RIGHT
+BB..EF 
+A.D.EF 
+A.DPPF.
+AC.GGG 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 73: I_UP
+BB..EF 
+A.D.EF 
+A.DPPF.
+ACIGGG 
+.CIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 74: L_RIGHT
+BB..EF 
+A.D.EF 
+A.DPPF.
+ACIGGG 
+.CIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 75: C_UP
+BB..EF 
+A.D.EF 
+ACDPPF.
+ACIGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 76: L_LEFT
+BB..EF 
+A.D.EF 
+ACDPPF.
+ACIGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 77: I_DOWN
+BB..EF 
+A.D.EF 
+ACDPPF.
+AC.GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 78: G_LEFT
+BB..EF 
+A.D.EF 
+ACDPPF.
+ACGGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 79: D_UP
+BBD.EF 
+A.D.EF 
+AC.PPF.
+ACGGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 80: G_RIGHT
+BBD.EF 
+A.D.EF 
+AC.PPF.
+AC.GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 81: I_UP
+BBD.EF 
+A.D.EF 
+AC.PPF.
+ACIGGG 
+..IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 82: L_RIGHT
+BBD.EF 
+A.D.EF 
+AC.PPF.
+ACIGGG 
+..IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 83: I_UP
+BBD.EF 
+A.D.EF 
+ACIPPF.
+ACIGGG 
+...HJJ 
+.LLHMM 
+
+------------------------------
+Langkah 84: L_LEFT
+BBD.EF 
+A.D.EF 
+ACIPPF.
+ACIGGG 
+...HJJ 
+LL.HMM 
+
+------------------------------
+Langkah 85: C_DOWN
+BBD.EF 
+A.D.EF 
+A.IPPF.
+ACIGGG 
+.C.HJJ 
+LL.HMM 
+
+------------------------------
+Langkah 86: L_RIGHT
+BBD.EF 
+A.D.EF 
+A.IPPF.
+ACIGGG 
+.C.HJJ 
+.LLHMM 
+
+------------------------------
+Langkah 87: I_DOWN
+BBD.EF 
+A.D.EF 
+A..PPF.
+ACIGGG 
+.CIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 88: L_LEFT
+BBD.EF 
+A.D.EF 
+A..PPF.
+ACIGGG 
+.CIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 89: I_DOWN
+BBD.EF 
+A.D.EF 
+A..PPF.
+AC.GGG 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 90: G_LEFT
+BBD.EF 
+A.D.EF 
+A..PPF.
+ACGGG. 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 91: A_DOWN
+BBD.EF 
+..D.EF 
+A..PPF.
+ACGGG. 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 92: G_RIGHT
+BBD.EF 
+..D.EF 
+A..PPF.
+AC.GGG 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 93: I_UP
+BBD.EF 
+..D.EF 
+A..PPF.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 94: L_RIGHT
+BBD.EF 
+..D.EF 
+A..PPF.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 95: P_LEFT
+BBD.EF 
+..D.EF 
+A.PP.F.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 96: L_LEFT
+BBD.EF 
+..D.EF 
+A.PP.F.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 97: I_DOWN
+BBD.EF 
+..D.EF 
+A.PP.F.
+AC.GGG 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 98: G_LEFT
+BBD.EF 
+..D.EF 
+A.PP.F.
+ACGGG. 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 99: C_UP
+BBD.EF 
+..D.EF 
+ACPP.F.
+ACGGG. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 100: G_RIGHT
+BBD.EF 
+..D.EF 
+ACPP.F.
+AC.GGG 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 101: I_UP
+BBD.EF 
+..D.EF 
+ACPP.F.
+ACIGGG 
+A.IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 102: E_DOWN
+BBD..F 
+..D.EF 
+ACPPEF.
+ACIGGG 
+A.IHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 103: L_RIGHT
+BBD..F 
+..D.EF 
+ACPPEF.
+ACIGGG 
+A.IHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 104: C_DOWN
+BBD..F 
+..D.EF 
+A.PPEF.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 105: L_LEFT
+BBD..F 
+..D.EF 
+A.PPEF.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 106: P_LEFT
+BBD..F 
+..D.EF 
+APP.EF.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 107: L_RIGHT
+BBD..F 
+..D.EF 
+APP.EF.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 108: A_DOWN
+BBD..F 
+..D.EF 
+.PP.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 109: P_LEFT
+BBD..F 
+..D.EF 
+PP..EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 110: D_DOWN
+BB...F 
+..D.EF 
+PPD.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 111: B_RIGHT
+.BB..F 
+..D.EF 
+PPD.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 112: B_RIGHT
+..BB.F 
+..D.EF 
+PPD.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 113: B_RIGHT
+...BBF 
+..D.EF 
+PPD.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 114: D_UP
+..DBBF 
+..D.EF 
+PP..EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 115: P_RIGHT
+..DBBF 
+..D.EF 
+.PP.EF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 116: P_RIGHT
+..DBBF 
+..D.EF 
+..PPEF.
+ACIGGG 
+ACIHJJ 
+ALLHMM 
+
+------------------------------
+Langkah 117: A_UP
+..DBBF 
+..D.EF 
+A.PPEF.
+ACIGGG 
+ACIHJJ 
+.LLHMM 
+
+------------------------------
+Langkah 118: L_LEFT
+..DBBF 
+..D.EF 
+A.PPEF.
+ACIGGG 
+ACIHJJ 
+LL.HMM 
+
+------------------------------
+Langkah 119: I_DOWN
+..DBBF 
+..D.EF 
+A.PPEF.
+AC.GGG 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 120: G_LEFT
+..DBBF 
+..D.EF 
+A.PPEF.
+ACGGG. 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 121: C_UP
+..DBBF 
+..D.EF 
+ACPPEF.
+ACGGG. 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 122: G_RIGHT
+..DBBF 
+..D.EF 
+ACPPEF.
+AC.GGG 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 123: A_UP
+..DBBF 
+A.D.EF 
+ACPPEF.
+AC.GGG 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 124: C_DOWN
+..DBBF 
+A.D.EF 
+A.PPEF.
+AC.GGG 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 125: G_LEFT
+..DBBF 
+A.D.EF 
+A.PPEF.
+ACGGG. 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 126: C_UP
+..DBBF 
+A.D.EF 
+ACPPEF.
+ACGGG. 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 127: F_DOWN
+..DBB. 
+A.D.EF 
+ACPPEF.
+ACGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 128: C_DOWN
+..DBB. 
+A.D.EF 
+A.PPEF.
+ACGGGF 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 129: A_DOWN
+..DBB. 
+..D.EF 
+A.PPEF.
+ACGGGF 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 130: C_UP
+..DBB. 
+..D.EF 
+ACPPEF.
+ACGGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 131: B_RIGHT
+..D.BB 
+..D.EF 
+ACPPEF.
+ACGGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 132: C_DOWN
+..D.BB 
+..D.EF 
+A.PPEF.
+ACGGGF 
+ACIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 133: A_UP
+..D.BB 
+A.D.EF 
+A.PPEF.
+ACGGGF 
+.CIHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 134: C_UP
+..D.BB 
+A.D.EF 
+ACPPEF.
+ACGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 135: A_UP
+A.D.BB 
+A.D.EF 
+ACPPEF.
+.CGGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 136: C_UP
+A.D.BB 
+ACD.EF 
+ACPPEF.
+..GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 137: G_LEFT
+A.D.BB 
+ACD.EF 
+ACPPEF.
+.GGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 138: C_UP
+ACD.BB 
+ACD.EF 
+A.PPEF.
+.GGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 139: G_RIGHT
+ACD.BB 
+ACD.EF 
+A.PPEF.
+..GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 140: A_DOWN
+.CD.BB 
+ACD.EF 
+A.PPEF.
+A.GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 141: G_LEFT
+.CD.BB 
+ACD.EF 
+A.PPEF.
+AGGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 142: P_LEFT
+.CD.BB 
+ACD.EF 
+APP.EF.
+AGGG.F 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 143: G_RIGHT
+.CD.BB 
+ACD.EF 
+APP.EF.
+A.GGGF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 144: A_DOWN
+.CD.BB 
+.CD.EF 
+APP.EF.
+A.GGGF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 145: G_LEFT
+.CD.BB 
+.CD.EF 
+APP.EF.
+AGGG.F 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 146: E_DOWN
+.CD.BB 
+.CD..F 
+APP.EF.
+AGGGEF 
+A.IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 147: A_UP
+.CD.BB 
+ACD..F 
+APP.EF.
+AGGGEF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 148: A_UP
+ACD.BB 
+ACD..F 
+APP.EF.
+.GGGEF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 149: G_LEFT
+ACD.BB 
+ACD..F 
+APP.EF.
+GGG.EF 
+..IHJJ 
+LLIHMM 
+
+------------------------------
+Langkah 150: H_UP
+ACD.BB 
+ACD..F 
+APP.EF.
+GGGHEF 
+..IHJJ 
+LLI.MM 
+
+------------------------------
+Langkah 151: M_LEFT
+ACD.BB 
+ACD..F 
+APP.EF.
+GGGHEF 
+..IHJJ 
+LLIMM. 
+
+------------------------------
+Langkah 152: H_UP
+ACD.BB 
+ACD..F 
+APPHEF.
+GGGHEF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 153: M_RIGHT
+ACD.BB 
+ACD..F 
+APPHEF.
+GGGHEF 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 154: J_LEFT
+ACD.BB 
+ACD..F 
+APPHEF.
+GGGHEF 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 155: M_LEFT
+ACD.BB 
+ACD..F 
+APPHEF.
+GGGHEF 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 156: H_UP
+ACD.BB 
+ACDH.F 
+APPHEF.
+GGG.EF 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 157: M_RIGHT
+ACD.BB 
+ACDH.F 
+APPHEF.
+GGG.EF 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 158: J_RIGHT
+ACD.BB 
+ACDH.F 
+APPHEF.
+GGG.EF 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 159: M_LEFT
+ACD.BB 
+ACDH.F 
+APPHEF.
+GGG.EF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 160: G_RIGHT
+ACD.BB 
+ACDH.F 
+APPHEF.
+.GGGEF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 161: M_RIGHT
+ACD.BB 
+ACDH.F 
+APPHEF.
+.GGGEF 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 162: J_LEFT
+ACD.BB 
+ACDH.F 
+APPHEF.
+.GGGEF 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 163: M_LEFT
+ACD.BB 
+ACDH.F 
+APPHEF.
+.GGGEF 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 164: E_UP
+ACD.BB 
+ACDHEF 
+APPHEF.
+.GGG.F 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 165: M_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+.GGG.F 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 166: J_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+.GGG.F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 167: M_LEFT
+ACD.BB 
+ACDHEF 
+APPHEF.
+.GGG.F 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 168: G_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+..GGGF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 169: M_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+..GGGF 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 170: J_LEFT
+ACD.BB 
+ACDHEF 
+APPHEF.
+..GGGF 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 171: M_LEFT
+ACD.BB 
+ACDHEF 
+APPHEF.
+..GGGF 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 172: F_DOWN
+ACD.BB 
+ACDHE. 
+APPHEF.
+..GGGF 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 173: M_RIGHT
+ACD.BB 
+ACDHE. 
+APPHEF.
+..GGGF 
+..IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 174: G_LEFT
+ACD.BB 
+ACDHE. 
+APPHEF.
+.GGG.F 
+..IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 175: M_LEFT
+ACD.BB 
+ACDHE. 
+APPHEF.
+.GGG.F 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 176: G_LEFT
+ACD.BB 
+ACDHE. 
+APPHEF.
+GGG..F 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 177: M_RIGHT
+ACD.BB 
+ACDHE. 
+APPHEF.
+GGG..F 
+..IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 178: F_UP
+ACD.BB 
+ACDHEF 
+APPHEF.
+GGG..F 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 179: M_LEFT
+ACD.BB 
+ACDHEF 
+APPHEF.
+GGG..F 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 180: J_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+GGG..F 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 181: M_RIGHT
+ACD.BB 
+ACDHEF 
+APPHEF.
+GGG..F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 182: H_DOWN
+ACD.BB 
+ACD.EF 
+APPHEF.
+GGGH.F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 183: M_LEFT
+ACD.BB 
+ACD.EF 
+APPHEF.
+GGGH.F 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 184: J_LEFT
+ACD.BB 
+ACD.EF 
+APPHEF.
+GGGH.F 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 185: M_RIGHT
+ACD.BB 
+ACD.EF 
+APPHEF.
+GGGH.F 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 186: F_DOWN
+ACD.BB 
+ACD.E. 
+APPHEF.
+GGGH.F 
+..IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 187: M_LEFT
+ACD.BB 
+ACD.E. 
+APPHEF.
+GGGH.F 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 188: F_DOWN
+ACD.BB 
+ACD.E. 
+APPHE..
+GGGH.F 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 189: H_UP
+ACD.BB 
+ACDHE. 
+APPHE..
+GGG..F 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 190: G_RIGHT
+ACD.BB 
+ACDHE. 
+APPHE..
+.GGG.F 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 191: G_RIGHT
+ACD.BB 
+ACDHE. 
+APPHE..
+..GGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 192: H_UP
+ACDHBB 
+ACDHE. 
+APP.E..
+..GGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 193: P_RIGHT
+ACDHBB 
+ACDHE. 
+A.PPE..
+..GGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 194: F_UP
+ACDHBB 
+ACDHE. 
+A.PPEF.
+..GGGF 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 195: F_UP
+ACDHBB 
+ACDHEF 
+A.PPEF.
+..GGGF 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 196: J_RIGHT
+ACDHBB 
+ACDHEF 
+A.PPEF.
+..GGGF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 197: G_LEFT
+ACDHBB 
+ACDHEF 
+A.PPEF.
+.GGG.F 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 198: M_RIGHT
+ACDHBB 
+ACDHEF 
+A.PPEF.
+.GGG.F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 199: A_DOWN
+.CDHBB 
+ACDHEF 
+A.PPEF.
+AGGG.F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 200: C_DOWN
+..DHBB 
+ACDHEF 
+ACPPEF.
+AGGG.F 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 201: A_DOWN
+..DHBB 
+.CDHEF 
+ACPPEF.
+AGGG.F 
+A.I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 202: J_LEFT
+..DHBB 
+.CDHEF 
+ACPPEF.
+AGGG.F 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 203: F_DOWN
+..DHBB 
+.CDHE. 
+ACPPEF.
+AGGG.F 
+A.IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 204: G_RIGHT
+..DHBB 
+.CDHE. 
+ACPPEF.
+A.GGGF 
+A.IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 205: M_LEFT
+..DHBB 
+.CDHE. 
+ACPPEF.
+A.GGGF 
+A.IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 206: C_DOWN
+..DHBB 
+..DHE. 
+ACPPEF.
+ACGGGF 
+A.IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 207: M_RIGHT
+..DHBB 
+..DHE. 
+ACPPEF.
+ACGGGF 
+A.IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 208: F_UP
+..DHBB 
+..DHEF 
+ACPPEF.
+ACGGGF 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 209: M_LEFT
+..DHBB 
+..DHEF 
+ACPPEF.
+ACGGGF 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 210: J_RIGHT
+..DHBB 
+..DHEF 
+ACPPEF.
+ACGGGF 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 211: C_DOWN
+..DHBB 
+..DHEF 
+A.PPEF.
+ACGGGF 
+ACI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 212: M_RIGHT
+..DHBB 
+..DHEF 
+A.PPEF.
+ACGGGF 
+ACI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 213: J_LEFT
+..DHBB 
+..DHEF 
+A.PPEF.
+ACGGGF 
+ACIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 214: F_DOWN
+..DHBB 
+..DHE. 
+A.PPEF.
+ACGGGF 
+ACIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 215: A_UP
+..DHBB 
+A.DHE. 
+A.PPEF.
+ACGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 216: M_LEFT
+..DHBB 
+A.DHE. 
+A.PPEF.
+ACGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 217: A_UP
+A.DHBB 
+A.DHE. 
+A.PPEF.
+.CGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 218: F_UP
+A.DHBB 
+A.DHEF 
+A.PPEF.
+.CGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 219: M_RIGHT
+A.DHBB 
+A.DHEF 
+A.PPEF.
+.CGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 220: J_RIGHT
+A.DHBB 
+A.DHEF 
+A.PPEF.
+.CGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 221: P_LEFT
+A.DHBB 
+A.DHEF 
+APP.EF.
+.CGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 222: M_LEFT
+A.DHBB 
+A.DHEF 
+APP.EF.
+.CGGGF 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 223: J_LEFT
+A.DHBB 
+A.DHEF 
+APP.EF.
+.CGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 224: M_RIGHT
+A.DHBB 
+A.DHEF 
+APP.EF.
+.CGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 225: F_DOWN
+A.DHBB 
+A.DHE. 
+APP.EF.
+.CGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 226: M_LEFT
+A.DHBB 
+A.DHE. 
+APP.EF.
+.CGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 227: F_DOWN
+A.DHBB 
+A.DHE. 
+APP.E..
+.CGGGF 
+.CIJJF 
+LLIMMF 
+
+------------------------------
+Langkah 228: H_DOWN
+A.D.BB 
+A.DHE. 
+APPHE..
+.CGGGF 
+.CIJJF 
+LLIMMF 
+
+------------------------------
+Langkah 229: F_UP
+A.D.BB 
+A.DHE. 
+APPHEF.
+.CGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 230: M_RIGHT
+A.D.BB 
+A.DHE. 
+APPHEF.
+.CGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 231: F_UP
+A.D.BB 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 232: M_LEFT
+A.D.BB 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 233: J_RIGHT
+A.D.BB 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 234: M_RIGHT
+A.D.BB 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 235: B_LEFT
+A.DBB. 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 236: M_LEFT
+A.DBB. 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 237: J_LEFT
+A.DBB. 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 238: M_RIGHT
+A.DBB. 
+A.DHEF 
+APPHEF.
+.CGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 239: F_DOWN
+A.DBB. 
+A.DHE. 
+APPHEF.
+.CGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 240: M_LEFT
+A.DBB. 
+A.DHE. 
+APPHEF.
+.CGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 241: F_DOWN
+A.DBB. 
+A.DHE. 
+APPHE..
+.CGGGF 
+.CIJJF 
+LLIMMF 
+
+------------------------------
+Langkah 242: A_DOWN
+..DBB. 
+A.DHE. 
+APPHE..
+ACGGGF 
+.CIJJF 
+LLIMMF 
+
+------------------------------
+Langkah 243: F_UP
+..DBB. 
+A.DHE. 
+APPHEF.
+ACGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 244: M_RIGHT
+..DBB. 
+A.DHE. 
+APPHEF.
+ACGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 245: F_UP
+..DBB. 
+A.DHEF 
+APPHEF.
+ACGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 246: M_LEFT
+..DBB. 
+A.DHEF 
+APPHEF.
+ACGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 247: J_RIGHT
+..DBB. 
+A.DHEF 
+APPHEF.
+ACGGGF 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 248: M_RIGHT
+..DBB. 
+A.DHEF 
+APPHEF.
+ACGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 249: F_UP
+..DBBF 
+A.DHEF 
+APPHEF.
+ACGGG. 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 250: M_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACGGG. 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 251: J_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACGGG. 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 252: M_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACGGG. 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 253: G_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+AC.GGG 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 254: M_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+AC.GGG 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 255: J_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+AC.GGG 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 256: M_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+AC.GGG 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 257: I_UP
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+LL..MM 
+
+------------------------------
+Langkah 258: M_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+LL.MM. 
+
+------------------------------
+Langkah 259: M_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+LLMM.. 
+
+------------------------------
+Langkah 260: J_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+LLMM.. 
+
+------------------------------
+Langkah 261: M_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+LL.MM. 
+
+------------------------------
+Langkah 262: M_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+LL..MM 
+
+------------------------------
+Langkah 263: L_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+.LL.MM 
+
+------------------------------
+Langkah 264: M_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+.LLMM. 
+
+------------------------------
+Langkah 265: J_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+.LLMM. 
+
+------------------------------
+Langkah 266: M_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+.LL.MM 
+
+------------------------------
+Langkah 267: L_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CI.JJ 
+..LLMM 
+
+------------------------------
+Langkah 268: J_LEFT
+..DBBF 
+A.DHEF 
+APPHEF.
+ACIGGG 
+.CIJJ. 
+..LLMM 
+
+------------------------------
+Langkah 269: C_DOWN
+..DBBF 
+A.DHEF 
+APPHEF.
+A.IGGG 
+.CIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 270: J_RIGHT
+..DBBF 
+A.DHEF 
+APPHEF.
+A.IGGG 
+.CI.JJ 
+.CLLMM 
+
+------------------------------
+Langkah 271: A_DOWN
+..DBBF 
+..DHEF 
+APPHEF.
+A.IGGG 
+ACI.JJ 
+.CLLMM 
+
+------------------------------
+Langkah 272: J_LEFT
+..DBBF 
+..DHEF 
+APPHEF.
+A.IGGG 
+ACIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 273: A_DOWN
+..DBBF 
+..DHEF 
+.PPHEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 274: P_LEFT
+..DBBF 
+..DHEF 
+PP.HEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 275: J_RIGHT
+..DBBF 
+..DHEF 
+PP.HEF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 276: C_UP
+..DBBF 
+..DHEF 
+PP.HEF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 277: J_LEFT
+..DBBF 
+..DHEF 
+PP.HEF.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 278: L_LEFT
+..DBBF 
+..DHEF 
+PP.HEF.
+ACIGGG 
+ACIJJ. 
+ALL.MM 
+
+------------------------------
+Langkah 279: M_LEFT
+..DBBF 
+..DHEF 
+PP.HEF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 280: D_DOWN
+...BBF 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 281: M_RIGHT
+...BBF 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+ALL.MM 
+
+------------------------------
+Langkah 282: L_RIGHT
+...BBF 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 283: J_RIGHT
+...BBF 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 284: C_DOWN
+...BBF 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 285: J_LEFT
+...BBF 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 286: B_LEFT
+..BB.F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 287: J_RIGHT
+..BB.F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 288: E_UP
+..BBEF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 289: J_LEFT
+..BBEF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 290: C_UP
+..BBEF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 291: J_RIGHT
+..BBEF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 292: L_LEFT
+..BBEF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACI.JJ 
+ALL.MM 
+
+------------------------------
+Langkah 293: B_LEFT
+.BB.EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACI.JJ 
+ALL.MM 
+
+------------------------------
+Langkah 294: L_RIGHT
+.BB.EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 295: J_LEFT
+.BB.EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 296: C_DOWN
+.BB.EF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 297: J_RIGHT
+.BB.EF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 298: H_UP
+.BBHEF 
+..DHEF 
+PPD..F.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 299: J_LEFT
+.BBHEF 
+..DHEF 
+PPD..F.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 300: E_DOWN
+.BBH.F 
+..DHEF 
+PPD.EF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 301: J_RIGHT
+.BBH.F 
+..DHEF 
+PPD.EF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 302: C_UP
+.BBH.F 
+..DHEF 
+PPD.EF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 303: L_LEFT
+.BBH.F 
+..DHEF 
+PPD.EF.
+ACIGGG 
+ACI.JJ 
+ALL.MM 
+
+------------------------------
+Langkah 304: J_LEFT
+.BBH.F 
+..DHEF 
+PPD.EF.
+ACIGGG 
+ACIJJ. 
+ALL.MM 
+
+------------------------------
+Langkah 305: M_LEFT
+.BBH.F 
+..DHEF 
+PPD.EF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 306: H_DOWN
+.BB..F 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 307: M_RIGHT
+.BB..F 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+ALL.MM 
+
+------------------------------
+Langkah 308: L_RIGHT
+.BB..F 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 309: J_RIGHT
+.BB..F 
+..DHEF 
+PPDHEF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 310: C_DOWN
+.BB..F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 311: J_LEFT
+.BB..F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 312: B_LEFT
+BB...F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 313: J_RIGHT
+BB...F 
+..DHEF 
+PPDHEF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 314: E_UP
+BB..EF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 315: J_LEFT
+BB..EF 
+..DHEF 
+PPDH.F.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 316: C_UP
+BB..EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 317: L_LEFT
+BB..EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACIJJ. 
+ALL.MM 
+
+------------------------------
+Langkah 318: M_LEFT
+BB..EF 
+..DHEF 
+PPDH.F.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 319: H_UP
+BB.HEF 
+..DHEF 
+PPD..F.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 320: D_UP
+BBDHEF 
+..DHEF 
+PP...F.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 321: P_RIGHT
+BBDHEF 
+..DHEF 
+.PP..F.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 322: P_RIGHT
+BBDHEF 
+..DHEF 
+..PP.F.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 323: P_RIGHT
+BBDHEF 
+..DHEF 
+...PPF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 324: D_DOWN
+BB.HEF 
+..DHEF 
+..DPPF.
+ACIGGG 
+ACIJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 325: C_UP
+BB.HEF 
+..DHEF 
+.CDPPF.
+ACIGGG 
+A.IJJ. 
+ALLMM. 
+
+------------------------------
+Langkah 326: A_UP
+BB.HEF 
+..DHEF 
+ACDPPF.
+ACIGGG 
+A.IJJ. 
+.LLMM. 
+
+------------------------------
+Langkah 327: M_RIGHT
+BB.HEF 
+..DHEF 
+ACDPPF.
+ACIGGG 
+A.IJJ. 
+.LL.MM 
+
+------------------------------
+Langkah 328: L_RIGHT
+BB.HEF 
+..DHEF 
+ACDPPF.
+ACIGGG 
+A.IJJ. 
+..LLMM 
+
+------------------------------
+Langkah 329: C_UP
+BB.HEF 
+.CDHEF 
+ACDPPF.
+A.IGGG 
+A.IJJ. 
+..LLMM 
+
+------------------------------
+Langkah 330: A_UP
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..IJJ. 
+..LLMM 
+
+------------------------------
+Langkah 331: L_LEFT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..IJJ. 
+.LL.MM 
+
+------------------------------
+Langkah 332: M_LEFT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..IJJ. 
+.LLMM. 
+
+------------------------------
+Langkah 333: L_LEFT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..IJJ. 
+LL.MM. 
+
+------------------------------
+Langkah 334: M_RIGHT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..IJJ. 
+LL..MM 
+
+------------------------------
+Langkah 335: J_RIGHT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..I.JJ 
+LL..MM 
+
+------------------------------
+Langkah 336: M_LEFT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..I.JJ 
+LL.MM. 
+
+------------------------------
+Langkah 337: M_LEFT
+BB.HEF 
+ACDHEF 
+ACDPPF.
+A.IGGG 
+..I.JJ 
+LLMM.. 
+
+------------------------------
+Langkah 338: C_DOWN
+BB.HEF 
+A.DHEF 
+ACDPPF.
+ACIGGG 
+..I.JJ 
+LLMM.. 
+
+------------------------------
+Langkah 339: J_LEFT
+BB.HEF 
+A.DHEF 
+ACDPPF.
+ACIGGG 
+..IJJ. 
+LLMM.. 
+
+------------------------------
+Langkah 340: B_RIGHT
+.BBHEF 
+A.DHEF 
+ACDPPF.
+ACIGGG 
+..IJJ. 
+LLMM.. 
+
+------------------------------
+Langkah 341: A_UP
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.CIGGG 
+..IJJ. 
+LLMM.. 
+
+------------------------------
+Langkah 342: M_RIGHT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.CIGGG 
+..IJJ. 
+LL.MM. 
+
+------------------------------
+Langkah 343: M_RIGHT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.CIGGG 
+..IJJ. 
+LL..MM 
+
+------------------------------
+Langkah 344: I_DOWN
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.C.GGG 
+..IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 345: M_LEFT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.C.GGG 
+..IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 346: J_RIGHT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.C.GGG 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 347: M_RIGHT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.C.GGG 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 348: G_LEFT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.CGGG. 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 349: M_LEFT
+ABBHEF 
+A.DHEF 
+ACDPPF.
+.CGGG. 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 350: C_DOWN
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CGGG. 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 351: G_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.C.GGG 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 352: I_UP
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CI.JJ 
+LL.MM. 
+
+------------------------------
+Langkah 353: M_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CI.JJ 
+LL..MM 
+
+------------------------------
+Langkah 354: L_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CI.JJ 
+.LL.MM 
+
+------------------------------
+Langkah 355: M_LEFT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CI.JJ 
+.LLMM. 
+
+------------------------------
+Langkah 356: J_LEFT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CIJJ. 
+.LLMM. 
+
+------------------------------
+Langkah 357: M_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CIJJ. 
+.LL.MM 
+
+------------------------------
+Langkah 358: L_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CIJJ. 
+..LLMM 
+
+------------------------------
+Langkah 359: J_RIGHT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+.CIGGG 
+.CI.JJ 
+..LLMM 
+
+------------------------------
+Langkah 360: C_DOWN
+ABBHEF 
+A.DHEF 
+A.DPPF.
+..IGGG 
+.CI.JJ 
+.CLLMM 
+
+------------------------------
+Langkah 361: J_LEFT
+ABBHEF 
+A.DHEF 
+A.DPPF.
+..IGGG 
+.CIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 362: A_DOWN
+.BBHEF 
+A.DHEF 
+A.DPPF.
+A.IGGG 
+.CIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 363: A_DOWN
+.BBHEF 
+..DHEF 
+A.DPPF.
+A.IGGG 
+ACIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 364: J_RIGHT
+.BBHEF 
+..DHEF 
+A.DPPF.
+A.IGGG 
+ACI.JJ 
+.CLLMM 
+
+------------------------------
+Langkah 365: A_DOWN
+.BBHEF 
+..DHEF 
+..DPPF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 366: J_LEFT
+.BBHEF 
+..DHEF 
+..DPPF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 367: C_UP
+.BBHEF 
+..DHEF 
+..DPPF.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 368: J_RIGHT
+.BBHEF 
+..DHEF 
+..DPPF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 369: B_LEFT
+BB.HEF 
+..DHEF 
+..DPPF.
+ACIGGG 
+ACI.JJ 
+A.LLMM 
+
+------------------------------
+Langkah 370: J_LEFT
+BB.HEF 
+..DHEF 
+..DPPF.
+ACIGGG 
+ACIJJ. 
+A.LLMM 
+
+------------------------------
+Langkah 371: C_DOWN
+BB.HEF 
+..DHEF 
+..DPPF.
+A.IGGG 
+ACIJJ. 
+ACLLMM 
+
+------------------------------
+Langkah 372: J_RIGHT
+BB.HEF 
+..DHEF 
+..DPPF.
+A.IGGG 
+ACI.JJ 
+ACLLMM 
+
+------------------------------
+Langkah 373: A_UP
+BB.HEF 
+..DHEF 
+A.DPPF.
+A.IGGG 
+ACI.JJ 
+.CLLMM 
+
+------------------------------
+Langkah 374: J_LEFT
+BB.HEF 
+..DHEF 
+A.DPPF.
+A.IGGG 
+ACIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 375: D_UP
+BBDHEF 
+..DHEF 
+A..PPF.
+A.IGGG 
+ACIJJ. 
+.CLLMM 
+
+------------------------------
+Langkah 376: C_UP
+BBDHEF 
+..DHEF 
+A..PPF.
+ACIGGG 
+ACIJJ. 
+..LLMM 
+
+------------------------------
+Langkah 377: L_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+ACIGGG 
+ACIJJ. 
+.LL.MM 
+
+------------------------------
+Langkah 378: L_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+ACIGGG 
+ACIJJ. 
+LL..MM 
+
+------------------------------
+Langkah 379: I_DOWN
+BBDHEF 
+..DHEF 
+A..PPF.
+AC.GGG 
+ACIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 380: M_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+AC.GGG 
+ACIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 381: J_RIGHT
+BBDHEF 
+..DHEF 
+A..PPF.
+AC.GGG 
+ACI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 382: M_RIGHT
+BBDHEF 
+..DHEF 
+A..PPF.
+AC.GGG 
+ACI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 383: G_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+ACGGG. 
+ACI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 384: J_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+ACGGG. 
+ACIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 385: M_LEFT
+BBDHEF 
+..DHEF 
+A..PPF.
+ACGGG. 
+ACIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 386: C_UP
+BBDHEF 
+..DHEF 
+AC.PPF.
+ACGGG. 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 387: M_RIGHT
+BBDHEF 
+..DHEF 
+AC.PPF.
+ACGGG. 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 388: C_UP
+BBDHEF 
+.CDHEF 
+AC.PPF.
+A.GGG. 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 389: M_LEFT
+BBDHEF 
+.CDHEF 
+AC.PPF.
+A.GGG. 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 390: J_RIGHT
+BBDHEF 
+.CDHEF 
+AC.PPF.
+A.GGG. 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 391: G_LEFT
+BBDHEF 
+.CDHEF 
+AC.PPF.
+AGGG.. 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 392: F_DOWN
+BBDHE. 
+.CDHEF 
+AC.PPF.
+AGGG.F 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 393: J_LEFT
+BBDHE. 
+.CDHEF 
+AC.PPF.
+AGGG.F 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 394: M_RIGHT
+BBDHE. 
+.CDHEF 
+AC.PPF.
+AGGG.F 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 395: G_RIGHT
+BBDHE. 
+.CDHEF 
+AC.PPF.
+A.GGGF 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 396: C_DOWN
+BBDHE. 
+..DHEF 
+AC.PPF.
+ACGGGF 
+A.IJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 397: M_LEFT
+BBDHE. 
+..DHEF 
+AC.PPF.
+ACGGGF 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 398: J_RIGHT
+BBDHE. 
+..DHEF 
+AC.PPF.
+ACGGGF 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 399: M_RIGHT
+BBDHE. 
+..DHEF 
+AC.PPF.
+ACGGGF 
+A.I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 400: C_DOWN
+BBDHE. 
+..DHEF 
+A..PPF.
+ACGGGF 
+ACI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 401: M_LEFT
+BBDHE. 
+..DHEF 
+A..PPF.
+ACGGGF 
+ACI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 402: D_DOWN
+BB.HE. 
+..DHEF 
+A.DPPF.
+ACGGGF 
+ACI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 403: M_RIGHT
+BB.HE. 
+..DHEF 
+A.DPPF.
+ACGGGF 
+ACI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 404: J_LEFT
+BB.HE. 
+..DHEF 
+A.DPPF.
+ACGGGF 
+ACIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 405: M_LEFT
+BB.HE. 
+..DHEF 
+A.DPPF.
+ACGGGF 
+ACIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 406: C_UP
+BB.HE. 
+..DHEF 
+ACDPPF.
+ACGGGF 
+A.IJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 407: J_RIGHT
+BB.HE. 
+..DHEF 
+ACDPPF.
+ACGGGF 
+A.I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 408: M_RIGHT
+BB.HE. 
+..DHEF 
+ACDPPF.
+ACGGGF 
+A.I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 409: A_UP
+BB.HE. 
+A.DHEF 
+ACDPPF.
+ACGGGF 
+..I.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 410: M_LEFT
+BB.HE. 
+A.DHEF 
+ACDPPF.
+ACGGGF 
+..I.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 411: C_DOWN
+BB.HE. 
+A.DHEF 
+A.DPPF.
+ACGGGF 
+.CI.JJ 
+LLIMM. 
+
+------------------------------
+Langkah 412: M_RIGHT
+BB.HE. 
+A.DHEF 
+A.DPPF.
+ACGGGF 
+.CI.JJ 
+LLI.MM 
+
+------------------------------
+Langkah 413: J_LEFT
+BB.HE. 
+A.DHEF 
+A.DPPF.
+ACGGGF 
+.CIJJ. 
+LLI.MM 
+
+------------------------------
+Langkah 414: M_LEFT
+BB.HE. 
+A.DHEF 
+A.DPPF.
+ACGGGF 
+.CIJJ. 
+LLIMM. 
+
+------------------------------
+Langkah 415: F_DOWN
+BB.HE. 
+A.DHE. 
+A.DPPF.
+ACGGGF 
+.CIJJF 
+LLIMM. 
+
+------------------------------
+Langkah 416: M_RIGHT
+BB.HE. 
+A.DHE. 
+A.DPPF.
+ACGGGF 
+.CIJJF 
+LLI.MM 
+
+------------------------------
+Langkah 417: C_UP
+BB.HE. 
+A.DHE. 
+ACDPPF.
+ACGGGF 
+..IJJF 
+LLI.MM 
+
+------------------------------
+Langkah 418: M_LEFT
+BB.HE. 
+A.DHE. 
+ACDPPF.
+ACGGGF 
+..IJJF 
+LLIMM. 
+
+------------------------------
+Langkah 419: F_DOWN
+BB.HE. 
+A.DHE. 
+ACDPP..
+ACGGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 420: P_RIGHT
+BB.HE. 
+A.DHE. 
+ACD.PP.
+ACGGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
+Langkah 421: P_RIGHT
+BB.HE. 
+A.DHE. 
+ACD..PP
+ACGGGF 
+..IJJF 
+LLIMMF 
+
+------------------------------
