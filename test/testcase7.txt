@@ -1,0 +1,8 @@
+6 6
+11
+..ABBB
+C.ADEE
+CPPD..K
+.F.DGG
+HFII.J
+HLLL.J
